@@ -146,7 +146,6 @@ Here's a link to the playlist- https://www.youtube.com/playlist?list=PLJ8C0Hk2ZK
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Stacks and how to clear, push, and pop them
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•L2CValue::new_num & L2CValue::new_int
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•for loops
-  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•
 <br><b>29. Ghidra & Status Scripts Part 1: How To Get Scripts</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Downloading and setting up ghidra
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Using ghidra to get status scripts
