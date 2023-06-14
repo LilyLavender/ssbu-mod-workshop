@@ -1,4 +1,4 @@
-# smashline-tutorial
+# Smash Ultimate Modding Workshop
 The Smash Ultimate Mod Workshop is the series where I go over everything from getting started to editing status scripts.
 
 Here's a link to the playlist- https://www.youtube.com/playlist?list=PLJ8C0Hk2ZKHvxjfFylRUIbVnDUvxLdejh
