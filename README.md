@@ -1,7 +1,7 @@
 # Smash Ultimate Modding Workshop
 The Smash Ultimate Mod Workshop is the series where I go over everything from getting started to editing status scripts.
 
-Here's a link to the playlist- https://www.youtube.com/playlist?list=PLJ8C0Hk2ZKHvxjfFylRUIbVnDUvxLdejh
+<a href="https://www.youtube.com/playlist?list=PLJ8C0Hk2ZKHvxjfFylRUIbVnDUvxLdejh">Here's</a> a link to the playlist
 
 <br><h2>List of episodes and what's covered in them:</h2>
 <b>1. Getting Started</b>
@@ -150,4 +150,4 @@ Here's a link to the playlist- https://www.youtube.com/playlist?list=PLJ8C0Hk2ZK
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Downloading and setting up ghidra
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Using ghidra to get status scripts
 <br><b>30. Ghidra & Status Scripts Part 2: How To Translate Scripts</b>
-  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Translating status scripts
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Introduction to translating status scripts
