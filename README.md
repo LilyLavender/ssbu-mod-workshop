@@ -66,6 +66,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•MotionModule::motion_kind
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•fighter.change_status
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•WorkModule::set_int
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Making a move always active
 <br><b>12. All About Frames</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Using ||
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•MotionModule::frame
