@@ -124,6 +124,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•VisibilityModule::set_whole
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•ModelModule::set_mesh_visibility
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Meshes
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Basic StudioSB Usage
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•macros::EFFECT vs macros::EFFECT_FOLLOW
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Teleportaion (part 2)
 <br><b>24. One-Slotting</b>
