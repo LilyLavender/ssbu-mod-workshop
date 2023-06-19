@@ -110,6 +110,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 <br><b>19. Direction</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•PostureModule::lr
 <br><b>20. Changing Size</b>
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•PostureModule::set_scale
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•PostureModule::scale
 <br><b>21. Slowing Time</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Distance formula
