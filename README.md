@@ -123,6 +123,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 <br><b>23. Visibility</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•VisibilityModule::set_whole
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•ModelModule::set_mesh_visibility
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•macros::EFFECT vs macros::EFFECT_FOLLOW
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Teleportaion (part 2)
 <br><b>24. One-Slotting</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•WorkModule::get_int
