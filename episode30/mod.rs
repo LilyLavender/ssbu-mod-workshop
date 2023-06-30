@@ -11,6 +11,61 @@ use {
 };
 use smash::lib::L2CValue;
 
+#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn ridley_specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+	WorkModule::set_int64(fighter.module_accessor, 0xa28f17495, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
+	WorkModule::set_int64(fighter.module_accessor, 0xed8a31e01, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND_AIR);
+	WorkModule::set_float(fighter.module_accessor, 0.25, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_LR_STICK_X);
+	WorkModule::set_float(fighter.module_accessor, 0.625, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_STICK_X);
+	WorkModule::set_float(fighter.module_accessor, 18.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_MUL);
+	WorkModule::set_float(fighter.module_accessor, 1.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_PASS_MUL);
+	WorkModule::set_float(fighter.module_accessor, 0.5, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_ACCEL_Y);
+	WorkModule::set_float(fighter.module_accessor, 0.66, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
+	WorkModule::set_float(fighter.module_accessor, 0.95, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_PASS_MUL);
+	WorkModule::set_float(fighter.module_accessor, 0.6, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_FALL_X_MUL);
+	WorkModule::set_int(fighter.module_accessor, 30, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_CONST_LANDING_FRAME);
+	WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
+	fighter.super_jump_punch(L2CValue::Void());
+	WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FALL);
+	fighter.sub_shift_status_main(L2CValue::Ptr(ridley_specialhi_main_loop as *const () as _))
+}
+
+unsafe extern "C" fn ridley_specialhi_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+	fighter.super_jump_punch_main();
+	return 0.into();
+}
+
+#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn ridley_specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+	StatusModule::init_settings(fighter.module_accessor, 
+	smash::app::SituationKind(*SITUATION_KIND_NONE),
+	*FIGHTER_KINETIC_TYPE_UNIQ,
+	GROUND_CORRECT_KIND_KEEP.into(),
+	smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES),
+	true,
+	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+	0);
+	FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, 
+	false, 
+	*FIGHTER_TREADED_KIND_NO_REAC,
+	false, 
+	false, 
+	false, 
+	(*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+	FIGHTER_STATUS_ATTR_START_TURN.into(),
+	FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI.into(),
+	0);
+	return 0.into();
+}
+
+#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
+unsafe fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+	fighter.super_jump_punch_end(L2CValue::Ptr(L2CFighterCommon_super_jump_punch_reset_common_condition as *const () as _));
+	return 0.into();
+}
+
 #[acmd_script( agent = "ridley", script = "game_specialhi", category = ACMD_GAME, low_priority )]
 unsafe fn ridley_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
@@ -158,63 +213,6 @@ if macros::is_excute(agent) {
     EffectModule::enable_sync_init_pos_last(agent.module_accessor);
 }
 }
-
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn ridley_specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-	WorkModule::set_int64(fighter.module_accessor, 0xa28f17495, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
-	WorkModule::set_int64(fighter.module_accessor, 0xed8a31e01, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND_AIR);
-	WorkModule::set_float(fighter.module_accessor, 0.25, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_LR_STICK_X);
-	WorkModule::set_float(fighter.module_accessor, 0.625, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_STICK_X);
-	WorkModule::set_float(fighter.module_accessor, 18.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_MUL);
-	WorkModule::set_float(fighter.module_accessor, 1.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_PASS_MUL);
-	WorkModule::set_float(fighter.module_accessor, 0.5, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_ACCEL_Y);
-	WorkModule::set_float(fighter.module_accessor, 0.66, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
-	WorkModule::set_float(fighter.module_accessor, 0.95, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_PASS_MUL);
-	WorkModule::set_float(fighter.module_accessor, 0.6, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_FALL_X_MUL);
-	WorkModule::set_int(fighter.module_accessor, 30, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_CONST_LANDING_FRAME);
-	WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
-	fighter.super_jump_punch(L2CValue::Void());
-	WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FALL);
-	fighter.sub_shift_status_main(L2CValue::Ptr(ridley_specialhi_main_loop as *const () as _))
-}
-
-unsafe extern "C" fn ridley_specialhi_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-	fighter.super_jump_punch_main();
-	return 0.into();
-}
-
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn ridley_specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-	StatusModule::init_settings(fighter.module_accessor, 
-	smash::app::SituationKind(*SITUATION_KIND_NONE),
-	*FIGHTER_KINETIC_TYPE_UNIQ,
-	GROUND_CORRECT_KIND_KEEP.into(),
-	smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES),
-	true,
-	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
-	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
-	*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
-	0);
-	FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, 
-	false, 
-	*FIGHTER_TREADED_KIND_NO_REAC,
-	false, 
-	false, 
-	false, 
-	(*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
-	FIGHTER_STATUS_ATTR_START_TURN.into(),
-	FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI.into(),
-	0);
-	return 0.into();
-}
-
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
-	fighter.super_jump_punch_end(L2CValue::Ptr(L2CFighterCommon_super_jump_punch_reset_common_condition as *const () as _));
-	return 0.into();
-}
-
-
 pub fn install() {
 	smashline::install_acmd_scripts!(
         ridley_specialairhi,
