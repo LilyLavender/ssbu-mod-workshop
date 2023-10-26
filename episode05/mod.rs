@@ -14,10 +14,12 @@ use {
 unsafe fn roy_attack11_fx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+		// Added fx
 		macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 0, -1, 0, 0, 0, 0.5, true);
     }
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
+		// Changed sword trail
         macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_item_deathscythe1"), Hash40::new("tex_item_deathscythe2"), 7, Hash40::new("sword1"), 0.0, 0.0, -0.8, Hash40::new("sword1"), -0.0, -0.0, 14.5, true, Hash40::new("roy_sword"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0 as u64, *EFFECT_AXIS_X, 0.0 as u64, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.3, 0.2);
     }
     frame(fighter.lua_state_agent, 8.0);
@@ -34,6 +36,7 @@ unsafe fn roy_attack11_fx(fighter: &mut L2CAgentBase) {
 unsafe fn roy_attackairn_fx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
+		// Added bg
         EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_roy_final"), false, false, false);
     }
 	frame(fighter.lua_state_agent, 5.0);
