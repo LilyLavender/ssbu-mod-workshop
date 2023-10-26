@@ -10,6 +10,7 @@ use {
     smashline::*,
 };
 
+// Multple scripts are edited at once with the bracketed section
 #[acmd_script( agent = "zelda", scripts = [ "game_appealhil", "game_appealhir" ], category = ACMD_GAME, low_priority )]
 unsafe fn zelda_appealhi(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 10.0);
