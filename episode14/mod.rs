@@ -14,6 +14,7 @@ use {
 unsafe fn cloud_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
+		// Random number 40 to 139
 		let deg = (smash::app::sv_math::rand(hash40("fighter"), 100) + 40) as u64;
         macros::ATTACK(fighter, 0, 0, Hash40::new("haver"), 8.0, deg, 100, 0, 46, 5.6, 0.0, 12.0, -2.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CLOUD_HIT, *ATTACK_REGION_SWORD);
         macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 8.0, deg, 100, 0, 46, 5.0, 0.0, 8.5, -2.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CLOUD_HIT, *ATTACK_REGION_SWORD);
@@ -60,10 +61,13 @@ unsafe fn cloud_attacks4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
+		// Random number 0-7
 		let rand = smash::app::sv_math::rand(hash40("fighter"), 8) as u64;
 		if rand != 7 {
+			// Vanilla hitboxes
 			macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 13.0, 361, 115, 0, 42, 5.5, 0.0, 9.0, 10.0, Some(0.0), Some(9.0), Some(6.5), 1.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CLOUD_SMASH_03, *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 12.0, 361, 115, 0, 42, 5.5, 0.0, 9.0, 16.0, Some(0.0), Some(9.0), Some(6.5), 1.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CLOUD_SMASH_03, *ATTACK_REGION_SWORD);
+			// Crit hitboxes
 		} else {
 			macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 26.0, 361, 115, 0, 42, 5.5, 0.0, 9.0, 10.0, Some(0.0), Some(9.0), Some(6.5), 1.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CLOUD_SMASH_03, *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 24.0, 361, 115, 0, 42, 5.5, 0.0, 9.0, 16.0, Some(0.0), Some(9.0), Some(6.5), 1.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CLOUD_SMASH_03, *ATTACK_REGION_SWORD);
