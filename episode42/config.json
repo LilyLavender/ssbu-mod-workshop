@@ -1,0 +1,8 @@
+{
+    "new-dir-files": {
+		"fighter/edge/cmn/effect": [
+            "effect/fighter/edge/trail/tex_edge_sword1_blood.nutexb",
+			"effect/fighter/edge/trail/tex_edge_sword3_blood.nutexb"
+        ]
+    }
+}
