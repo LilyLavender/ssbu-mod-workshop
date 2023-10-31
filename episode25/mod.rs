@@ -12,12 +12,11 @@ use {
 
 #[skyline::hook(replace = StatusModule::situation_kind)]
 unsafe fn situation_kind_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> i32 {
-    if PostureModule::pos_x(module_accessor) < 0.0 {
-		
+    // On left side of stage
+	if PostureModule::pos_x(module_accessor) < 0.0 {
 		return *SITUATION_KIND_GROUND;
-		
 	} 
-	
+	// Run original code of situation_kind funct
 	original!()(module_accessor)
 }
 
