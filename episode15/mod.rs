@@ -19,7 +19,7 @@ fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
 		
 		if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_r") || 
 		MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") {
-			if MotionModule::frame(fighter.module_accessor) > 10.0 && MotionModule::frame(fighter.module_accessor) < 20.0{
+			if MotionModule::frame(fighter.module_accessor) > 10.0 && MotionModule::frame(fighter.module_accessor) < 20.0 {
 				
 				if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) { // Dpad up
 					gaoMode[entry_id] = 0;
@@ -34,15 +34,15 @@ fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
 			}	
 		}
 		
-		if gaoMode[entry_id] == 0 { 
+		if gaoMode[entry_id] == 0 { // Clear effects
 			macros::WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
-			damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
-		} else if gaoMode[entry_id] == 1 { 
-			macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
-		} else if gaoMode[entry_id] == 2 { 
-			macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-		} else if gaoMode[entry_id] == 3 { 
-			damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+			damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0); 
+		} else if gaoMode[entry_id] == 1 { // Invincibility (Moves connect, don't do damage)
+			macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE); 
+		} else if gaoMode[entry_id] == 2 { // Intangibily (moves can't connect)
+			macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU); 
+		} else if gaoMode[entry_id] == 3 { // Super Armor
+			damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0); 
 		}
 		
 	}
