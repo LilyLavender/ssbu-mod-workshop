@@ -26,6 +26,7 @@ unsafe fn ryu_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+	    // Added search_hit on_flag
 		WorkModule::on_flag(fighter.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
     }
     frame(fighter.lua_state_agent, 5.5);
@@ -42,6 +43,7 @@ unsafe fn ryu_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+		// Added search_hit ff_flag
 		WorkModule::off_flag(fighter.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
@@ -59,10 +61,15 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let defender_boma = sv_battle_object::module_accessor(defender_id);
     let attacker_kind = sv_battle_object::kind(attacker_id);
 	let defender_kind = sv_battle_object::kind(defender_id);
-    if (WorkModule::is_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT)) {
+	// if search_hit flag is on
+    if WorkModule::is_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT) {
+		// add velocity
 		KineticModule::add_speed(attacker_boma, &Vector3f{ x: -3.0, y: 3.0, z: 0.0 });
+		// disable flag
 		WorkModule::off_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
-		if (utility::get_category(&mut *defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER) {
+		// if thing being hit is a fighter
+		if utility::get_category(&mut *defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+			// give fighter being hit sticky bomb
 			ItemModule::have_item(defender_boma, smash::app::ItemKind(*ITEM_KIND_CHEWING), 0, 0, false, false);
 		}
     }
