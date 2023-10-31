@@ -13,7 +13,9 @@ use {
 #[acmd_script( agent = "master", script = "game_attackairn", category = ACMD_GAME, low_priority )]
 unsafe fn master_attackairn(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
+		// Changed bow to sword
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, false, -1);
+		// Sword doesn't actually have an "attack_air_n" motion
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, Hash40::new("attack_air_n"), false, -1.0);
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 3.0);
     }
@@ -44,10 +46,12 @@ unsafe fn master_attackairn(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 53.0);
     if macros::is_excute(fighter) {
+		// Changed bow to sword
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
 
+// Note that this is ONLY down-angled fsmash
 #[acmd_script( agent = "master", script = "game_attacks4lw", category = ACMD_GAME, low_priority )]
 unsafe fn master_attacks4lw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
@@ -63,6 +67,7 @@ unsafe fn master_attacks4lw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, 1.0);
     frame(fighter.lua_state_agent, 25.0);
     if macros::is_excute(fighter) {
+		// Added haveitem call
 		ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 11.5, 361, 90, 0, 55, 4.5, 0.0, 5.5, 6.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, 2, 0, Hash40::new("haver"), 11.5, 361, 90, 0, 55, 1.6, 0.0, 3.0, 0.0, Some(0.0), Some(13.0), Some(0.0), 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
