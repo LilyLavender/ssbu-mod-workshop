@@ -23,11 +23,10 @@ unsafe fn after_image4_on_arg29_replace(lua_state: u64) {
 		l2c_agent.clear_lua_stack();
 		for i in 0..29 {
 			if i == 0 {
-				// Hash is tex_edge_sword1, this method is reqired because 0x0fd3b5c426 is too big to use outside of a statment such as this
-				if hitbox_params[0].get_int() == L2CValue::new_int(0x0fd3b5c426).get_int() { 
-					l2c_agent.push_lua_stack(&mut L2CValue::new_int(0x155d2ab4d2)); // hash for tex_edge_sword1_blood
+				if hitbox_params[0].get_int() == L2CValue::new_int(hash40("tex_edge_sword1")).get_int() { 
+					l2c_agent.push_lua_stack(&mut L2CValue::new_int(hash40("tex_edge_sword1_blood")));
 				} else { // Because the only other time sephiroth uses ai4a29 is to call sword3, this is essentially just checking for that
-					l2c_agent.push_lua_stack(&mut L2CValue::new_int(0x15cab5a5fb)); // hash for tex_edge_sword3_blood
+					l2c_agent.push_lua_stack(&mut L2CValue::new_int(hash40("tex_edge_sword3_blood"))); 
 				}
 			} else {
 				l2c_agent.push_lua_stack(&mut hitbox_params[i].clone());
