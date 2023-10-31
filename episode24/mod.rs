@@ -12,6 +12,7 @@ use {
 
 #[acmd_script( agent = "wario", script = "game_attackhi3", category = ACMD_GAME, low_priority )]
 unsafe fn wario_attackhi3(fighter: &mut L2CAgentBase) {
+	// Odd slots, to do just a single slot, use "== slotnum"
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 2 == 1 {
 		
 		frame(fighter.lua_state_agent, 5.0);
