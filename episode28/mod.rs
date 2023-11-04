@@ -32,7 +32,7 @@ unsafe fn attack_replace(lua_state: u64) {
 			} else if i == 7 {
 				l2c_agent.push_lua_stack(&mut L2CValue::new_int(160));
 			} else if i == 32 {
-				l2c_agent.push_lua_stack(&mut L2CValue::new_int(0x12c7990841));
+				l2c_agent.push_lua_stack(&mut L2CValue::new_int(hash40("collision_attr_ice")));
 			}
 			// If index isn't one of the aforementioned values, use the values originally passed into the function
 			else {
