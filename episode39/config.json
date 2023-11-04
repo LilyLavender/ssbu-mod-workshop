@@ -1,0 +1,36 @@
+{
+    "new-dir-files": {
+		"fighter/samusd/c00": 
+        [
+			"fighter/samusd/motion/body/c00/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c01": 
+        [
+			"fighter/samusd/motion/body/c01/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c02": 
+        [
+			"fighter/samusd/motion/body/c02/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c03": 
+        [
+			"fighter/samusd/motion/body/c03/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c04": 
+        [
+			"fighter/samusd/motion/body/c04/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c05": 
+        [
+			"fighter/samusd/motion/body/c05/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c06": 
+        [
+			"fighter/samusd/motion/body/c06/c00attack13.nuanmb"
+        ],
+		"fighter/samusd/c07": 
+        [
+			"fighter/samusd/motion/body/c07/c00attack13.nuanmb"
+        ]
+    }
+}
