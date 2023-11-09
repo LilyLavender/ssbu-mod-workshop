@@ -19,7 +19,7 @@ fn robot_frame(fighter: &mut L2CFighterCommon) {
 		if currDamage[entry_id] != DamageModule::damage(boma, 0) {
 			println!();
 			println!();
-			println!("<|°_°|> Player {}", entry_id - 1);
+			println!("<|°_°|> Player {}", entry_id + 1);
 			println!("Damage changed from {} to {}", currDamage[entry_id], DamageModule::damage(boma, 0));
 			println!("current position: {}, {}", PostureModule::pos_x(boma), PostureModule::pos_y(boma));
 			println!("gyro charge value: {}", WorkModule::get_float(boma, *FIGHTER_ROBOT_INSTANCE_WORK_ID_FLOAT_GYRO_CHARGE_VALUE));
