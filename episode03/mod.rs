@@ -11,10 +11,10 @@ use {
 };
 
 #[acmd_script( agent = "kirby", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn kirby_attacklw3(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, // do not edit
+unsafe fn kirby_attacklw3(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, // do not edit
 		0, // id - 0
 		0, // part - 1
 		Hash40::new("toer"), // bone - 2
@@ -46,11 +46,11 @@ unsafe fn kirby_attacklw3(fighter: &mut L2CAgentBase) {
 		*COLLISION_SOUND_ATTR_KICK, // sfx type - 34
 		*ATTACK_REGION_KICK); // type - 35
 		
-		AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
+		AttackModule::set_attack_height_all(agent.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
     }
-    wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
+    wait(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
     }
 }
 
