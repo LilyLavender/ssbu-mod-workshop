@@ -24,19 +24,11 @@ unsafe fn zelda_appealhi(agent: &mut L2CAgentBase) {
 		} else if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) { // Dpad up
 			DamageModule::add_damage(agent.module_accessor, 10.0, 0);
 		} else if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) { // Dpad down
-			if DamageModule::damage(agent.module_accessor, 0) >= 10.0 {
-				DamageModule::add_damage(agent.module_accessor, -10.0, 0);
-			} else {
-				DamageModule::add_damage(agent.module_accessor, -1.0 * DamageModule::damage(agent.module_accessor, 0), 0);
-			}
+			DamageModule::heal(agent.module_accessor, -10.0, 0);
 		} else if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) { // Dpad left
 			DamageModule::add_damage(agent.module_accessor, 3.0, 0);
 		} else if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) { // Dpad right
-			if DamageModule::damage(agent.module_accessor, 0) >= 3.0 {
-				DamageModule::add_damage(agent.module_accessor, -3.0, 0);
-			} else {
-				DamageModule::add_damage(agent.module_accessor, -1.0 * DamageModule::damage(agent.module_accessor, 0), 0);
-			}
+			DamageModule::heal(agent.module_accessor, -3.0, 0);
 		}
 		
 		let xpos = ControlModule::get_stick_x(agent.module_accessor);
