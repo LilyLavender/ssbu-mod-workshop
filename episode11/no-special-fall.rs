@@ -14,7 +14,7 @@ use {
 fn kamui_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		// No special fall
-	    	if(MotionModule::motion_kind(fighter.module_accessor) == hash40("fall_special")) {
+	    if (MotionModule::motion_kind(fighter.module_accessor) == hash40("fall_special")) {
 			fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
 			WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
 		}
