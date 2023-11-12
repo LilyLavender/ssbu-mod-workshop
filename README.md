@@ -129,11 +129,11 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
   <br>&emsp;&ensp;•macros::EFFECT vs macros::EFFECT_FOLLOW
   <br>&emsp;&ensp;•macros::LAST_EFFECT_SET_RATE
   <br>&emsp;&ensp;•Teleportaion (part 2)
-<br><b>24. One-Slotting</b>
+<br><b>24. Slotting</b>
   <br>&emsp;&ensp;•WorkModule::get_int
   <br>&emsp;&ensp;•Using get_int to get a player's slot
   <br>&emsp;&ensp;•Modulo
-  <br>&emsp;&ensp;•One-slotting movesets
+  <br>&emsp;&ensp;•Slotting movesets
 <br><b>25. Hooking Functions</b>
   <br>&emsp;&ensp;•Hooking functions other that hitboxes
   <br>&emsp;&ensp;•Hooking StatusModule::situation_kind
