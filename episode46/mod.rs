@@ -24,11 +24,10 @@ unsafe fn luigi_fireball_effect_regular(agent: &mut L2CAgentBase) {
 	if macros::is_excute(agent) {
 		if get_value_float(agent.lua_state_agent, *SO_VAR_FLOAT_LR) < 0.0 {
 			macros::EFFECT_FOLLOW(agent, Hash40::new("luigi_fb_bullet_l"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 0.6, true);
-			macros::LAST_EFFECT_SET_COLOR(agent, 1.5, 0.0, 0.0);
 		} else {
 			macros::EFFECT_FOLLOW(agent, Hash40::new("luigi_fb_bullet_r"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 0.6, true);
-			macros::LAST_EFFECT_SET_COLOR(agent, 1.5, 0.0, 0.0);
 		}
+		macros::LAST_EFFECT_SET_COLOR(agent, 1.5, 0.0, 0.0);
 		for _ in 0..10 {
 			macros::EFFECT_FOLLOW(agent, Hash40::new("sys_aura_dark"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 5.0, true);
 			macros::LAST_EFFECT_SET_COLOR(agent, 0.5, 0.0, 0.0);
