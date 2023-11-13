@@ -10,7 +10,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
   <br>&emsp;&ensp;•How hitbox scripts are composed
 <br><b>3. Changing Hitbox Data</b>
   <br>&emsp;&ensp;•macros::ATTACK and its parameters
-<br><b>4. My Resources</b>
+<br><b>4. My Resources Part 1</b>
   <br>&emsp;&ensp;•<a href="https://github.com/WuBoytH/SSBU-Dumped-Scripts/tree/main/smashline">WuBoy's script dump</a>
   <br>&emsp;&ensp;•cpp.rs and lua_const.rs files
   <br>&emsp;&ensp;•<a href="https://discord.gg/ASJyTrZ">Smash Ultimate Modding Discord</a>
@@ -129,7 +129,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
   <br>&emsp;&ensp;•macros::EFFECT vs macros::EFFECT_FOLLOW
   <br>&emsp;&ensp;•macros::LAST_EFFECT_SET_RATE
   <br>&emsp;&ensp;•Teleportaion (part 2)
-<br><b>24. Slotting</b>
+<br><b>24. Slotting Part 1</b>
   <br>&emsp;&ensp;•WorkModule::get_int
   <br>&emsp;&ensp;•Using get_int to get a player's slot
   <br>&emsp;&ensp;•Modulo
