@@ -83,7 +83,7 @@ unsafe extern "C" fn luigi_fireball_start_main_loop(weapon: &mut L2CWeaponCommon
 	}
 	
 	// Add y speed until max speed is reached
-	if (status_frame == 1.0) {
+	if status_frame == 1.0 {
 		speed_y = 2.0 + (stick_y + 1.0) / 2.0;
 	}
 	if speed_max_y > speed_x.abs() {
