@@ -35,6 +35,23 @@ unsafe fn luigi_fireball_effect_regular(agent: &mut L2CAgentBase) {
 	}
 }
 
+#[status_script(agent = "luigi_fireball", status = WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe extern "C" fn luigi_fireball_start_pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
+	StatusModule::init_settings(
+		weapon.module_accessor, 
+		smash::app::SituationKind(*SITUATION_KIND_AIR), 
+		*WEAPON_KINETIC_TYPE_NORMAL, 
+		GROUND_CORRECT_KIND_NONE.into(), 
+		smash::app::GroundCliffCheckKind(0), 
+		false, 
+		0, 
+		0, 
+		0, 
+		0
+	);
+	return 0.into();
+}
+
 #[status_script(agent = "luigi_fireball", status = WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn luigi_fireball_start_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
 	MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
@@ -66,7 +83,6 @@ unsafe extern "C" fn luigi_fireball_start_main_loop(weapon: &mut L2CWeaponCommon
 	}
 	
 	// Add y speed until max speed is reached
-	
 	if (status_frame == 1.0) {
 		speed_y = 2.0 + (stick_y + 1.0) / 2.0;
 	}
@@ -83,27 +99,10 @@ unsafe extern "C" fn luigi_fireball_start_main_loop(weapon: &mut L2CWeaponCommon
 	return 0.into();
 }
 
-#[status_script(agent = "luigi_fireball", status = WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe extern "C" fn luigi_fireball_start_pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
-	StatusModule::init_settings(
-		weapon.module_accessor, 
-		smash::app::SituationKind(*SITUATION_KIND_AIR), 
-		*WEAPON_KINETIC_TYPE_NORMAL, 
-		GROUND_CORRECT_KIND_NONE.into(), 
-		smash::app::GroundCliffCheckKind(0), 
-		false, 
-		0, 
-		0, 
-		0, 
-		0
-	);
-	return 0.into();
-}
-
 pub fn install() {
     install_status_scripts!(
-		luigi_fireball_start_main,
 		luigi_fireball_start_pre,
+		luigi_fireball_start_main,
     );
 	smashline::install_acmd_scripts!(
 		luigi_fireball_game_regular,
