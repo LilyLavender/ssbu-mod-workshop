@@ -11,7 +11,7 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 <br>**3. Changing Hitbox Data**
   <br>&emsp;&ensp;• macros::ATTACK and its parameters
 <br>**4. My Resources Part 1**
-  <br>&emsp;&ensp;• [WuBoy's script dump]https://github.com/WuBoytH/SSBU-Dumped-Scripts/tree/main/smashline)
+  <br>&emsp;&ensp;• [WuBoy's script dump](https://github.com/WuBoytH/SSBU-Dumped-Scripts/tree/main/smashline)
   <br>&emsp;&ensp;• cpp.rs and lua_const.rs files
   <br>&emsp;&ensp;• [Smash Ultimate Modding Discord](https://discord.gg/ASJyTrZ)
   <br>&emsp;&ensp;• [Ultimate Frame Data](https://ultimateframedata.com/)
