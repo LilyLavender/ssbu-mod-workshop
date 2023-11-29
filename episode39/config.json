@@ -1,0 +1,10 @@
+{
+    "new-dir-files": {
+		"fighter/littlemac/c00": 
+        [
+			"fighter/littlemac/model/body/c00/met_chrom_001_col.nutexb",
+			"fighter/littlemac/model/body/c00/met_chrom_001_nor.nutexb",
+			"fighter/littlemac/model/body/c00/met_chrom_001_prm.nutexb"
+        ]
+    }
+}
