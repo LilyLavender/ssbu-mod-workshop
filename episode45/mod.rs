@@ -41,3 +41,17 @@ pub fn install() {
 		agent_init
 	);
 }
+
+// List from black_calculus
+/*
+FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_N_COMMAND = Quarter Circle Forward, Hadoken
+FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_N2_COMMAND = Half Circle Forward, Shakunetsu
+FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_S_COMMAND = Quarter Circle Back, Tatsumaki
+FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_HI_COMMAND = Z input, Shoryuken
+FIGHTER_PAD_CMD_CAT4_FLAG_COMMAND_6N6 = Double tap forward
+FIGHTER_PAD_CMD_CAT4_FLAG_COMMAND_4N4 = Double tap backward
+FIGHTER_PAD_CMD_CAT4_FLAG_ATTACK_COMMAND1 = Quarter circle down, Ken's Oosoto Mawashi Geri
+FIGHTER_PAD_CMD_CAT4_FLAG_SUPER_SPECIAL_COMMAND = Dobule Quarter Circle Forward, Buster Wolf
+FIGHTER_PAD_CMD_CAT4_FLAG_SUPER_SPECIAL2_COMMAND = Half Circle Back -> Forward, Power Geyser
+FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_HI2_COMMAND = Charge down -> Up, Rising Tackle
+*/
