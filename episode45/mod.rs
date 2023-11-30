@@ -15,6 +15,8 @@ pub const KIND:						i32 = 0x2;
 pub const CMD_CAT4:					i32 = 0x23;
 pub const CHECK_SPECIAL_COMMAND:	i32 = 0x3C;
 
+const FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND : i32 = 0x200000f0;
+
 #[fighter_init]
 fn agent_init(fighter: &mut L2CFighterCommon) {
 	unsafe {
@@ -27,19 +29,44 @@ fn agent_init(fighter: &mut L2CFighterCommon) {
 }
 
 unsafe extern "C" fn wolf_check_special_command(fighter: &mut L2CFighterCommon) -> L2CValue {
+	let mut ret = false;
 	let cat4 = fighter.global_table[CMD_CAT4].get_i32();
-	if cat4 & *FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_N_COMMAND != 0
+	
+	// Side B
+	if !ret && cat4 & *FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_N_COMMAND != 0
 	&& WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S_COMMAND) {
-		fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_S.into(), true.into());
-		return true.into();
+		WorkModule::on_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND);
+		fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_S.into(), false.into());
+		ret = true;
 	}
-	return false.into();
+	
+	// Up B
+	if !ret && cat4 & *FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_HI2_COMMAND != 0
+	&& WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI_COMMAND) {
+		fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_HI.into(), true.into());
+		ret = true;
+	}
+	
+	// Return bool
+	ret.into()
+}
+
+#[status_script(agent = "wolf", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe extern "C" fn wolf_special_s_start_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND) {
+		AttackModule::set_power_up(fighter.module_accessor, 1.5);
+		WorkModule::off_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND)
+	}
+	original!(fighter)
 }
 
 pub fn install() {
 	install_agent_init_callback!(
 		agent_init
 	);
+	install_status_scripts!(
+        wolf_special_s_start_main,
+    );
 }
 
 // List from black_calculus
