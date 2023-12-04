@@ -203,3 +203,35 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 ### 41. Slotting Part 2
 - More efficient method of slotting
 - Editing motion_list
+### 42. Ghidra & Status Scripts Part 3: goto and LAB_ Functions
+- Translating goto and LAB_ functions
+- GroundModule::is_wall_touch_line
+- CancelModule::is_enable_cancel
+- MotionModule::is_end
+- Basic MotionModule::change_motion usage
+### 43. Ghidra & Status Scripts Part 4: FUN_ Functions
+- Translating FUN_ functions
+- SUB_STATUSes (source code, not video)
+- .abs()
+- MotionModule::set_rate
+- MotionModule::rate
+- GroundModule::correct
+- KineticModule::change_kinetic
+- WorkModule::inc_int & WorkModule::dec_int
+- Basic MotionModule::change_motion usage
+- Very very basics of fighter specializers
+### 44. Projectiles
+- Changing projectile hitboxes & effects
+- macros::LAST_EFFECT_SET_COLOR
+- Advanced MotionModule::change_motion usage
+- weapon.fastshift
+- Getting owner_boma
+- sv_kinetic_energy::set_speed
+- Changing the path of a projectile
+### 45. Command Inputs
+- Command Categories
+- FIGHTER_INSTANCE_WORK_ID_FLAG_CAN_SPECIAL_COMMAND
+- fighter.global_table[0x3C]
+- .assign()
+### 46. Smashline 2
+- WIP
