@@ -86,94 +86,45 @@ unsafe extern "C" fn FUN_710001d850(fighter: &mut L2CFighterCommon) {
 
 // Substatus
 unsafe extern "C" fn FUN_710001ca30(fighter: &mut L2CFighterCommon, param_3: L2CValue) -> L2CValue {
-    WorkModule::inc_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_HOP_COUNT);
-    WorkModule::dec_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE);
-    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE) <= 0 {
-        WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE);
-        
-        // Todo: optimize this bit
-        let ss_se_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE_COUNTER);
-        if ss_se_counter != 0 {
-            if ss_se_counter != 1 {
-                if ss_se_counter != 2 {
-                    if ss_se_counter != 3 {
-                        if ss_se_counter != 4 {
-                            if ss_se_counter != 5 {
-                                if ss_se_counter != 6 {
-                                    if ss_se_counter != 7 {
-                                        if ss_se_counter != 8 {
-                                            if ss_se_counter != 9 {
-                                                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish05"), true, false, false, false, smash::app::enSEType(0));
-                                            } else {
-                                                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish05"), true, false, false, false, smash::app::enSEType(0));
-                                            }
-                                        } else {
-                                            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish06"), true, false, false, false, smash::app::enSEType(0));
-                                        }
-                                    } else {
-                                        SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish06"), true, false, false, false, smash::app::enSEType(0));
-                                    }
-                                } else {
-                                    if motion_kind != hash40("special_n_spin_c3") {
-                                        SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish07"), true, false, false, false, smash::app::enSEType(0));
-                                    } else { 
-                                        SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x1896dcd23e }, true, false, false, false, smash::app::enSEType(0));
-                                    }
-                                }
-                            } else {
-                                if motion_kind != hash40("special_n_spin_c3") {
-                                    SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish09"), true, false, false, false, smash::app::enSEType(0));
-                                } else {
-                                    SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x187603a50d }, true, false, false, false, smash::app::enSEType(0));
-                                }
-                            }
-                        } else {
-                            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish10"), true, false, false, false, smash::app::enSEType(0));
-                        }
-                    } else {
-                        if motion_kind != hash40("special_n_spin_c3") {
-                            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish11"), true, false, false, false, smash::app::enSEType(0));
-                        } else {
-                            SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x188ed7a452 }, true, false, false, false, smash::app::enSEType(0));
-                        }
-                    }
-                } else {
-                    if motion_kind != hash40("special_n_spin_c3") {
-                        SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish11"), true, false, false, false, smash::app::enSEType(0));
-                    } else {
-                        SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x188ed7a452 }, true, false, false, false, smash::app::enSEType(0));
-                    }
-                }
-            } else {
-                if motion_kind != hash40("special_n_spin_c3") {
-                    SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish09"), true, false, false, false, smash::app::enSEType(0));
-                } else {
-                    SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x187603a50d }, true, false, false, false, smash::app::enSEType(0));
-                }
-            }
-        } else {
-            if motion_kind != hash40("special_n_spin_c3") {
-                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_swish07"), true, false, false, false, smash::app::enSEType(0));
-            } else {
-                SoundModule::play_se(fighter.module_accessor, smash::phx::Hash40 { hash: 0x1896dcd23e }, true, false, false, false, smash::app::enSEType(0));
-            }
+    if param_3.get_bool() {
+        WorkModule::inc_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_HOP_COUNT);
+        WorkModule::dec_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE);
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE) <= 0 {
+            WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE);
+            
+            // Todo: optimize this bit
+            let se_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE_COUNTER);
+            let se = match se_counter {
+                0 => { if motion_kind == hash40("special_n_spin_c3") { 0x1896dcd23e } else { hash40("se_metaknight_swish07") } },
+                1 => { if motion_kind == hash40("special_n_spin_c3") { 0x187603a50d } else { hash40("se_metaknight_swish09") } },
+                2 => { if motion_kind == hash40("special_n_spin_c3") { 0x188ed7a452 } else { hash40("se_metaknight_swish11") } },
+                3 => { if motion_kind == hash40("special_n_spin_c3") { 0x188ed7a452 } else { hash40("se_metaknight_swish11") } },
+                4 => hash40("se_metaknight_swish10"),
+                5 => { if motion_kind == hash40("special_n_spin_c3") { 0x187603a50d } else { hash40("se_metaknight_swish09") } },
+                6 => { if motion_kind == hash40("special_n_spin_c3") { 0x1896dcd23e } else { hash40("se_metaknight_swish07") } },
+                7 => hash40("se_metaknight_swish06"),
+                8 => hash40("se_metaknight_swish06"),
+                9 => hash40("se_metaknight_swish05"),
+                _ => hash40("se_metaknight_swish05"),
+            };
+            SoundModule::play_se(fighter.module_accessor, Hash40::new_raw(se), true, false, false, false, enSEType(0));
+            WorkModule::inc_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE_COUNTER);
         }
-        WorkModule::inc_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE_COUNTER);
-    }
-    
-    if fighter.global_table[0x16] == *SITUATION_KIND_GROUND {
-    
-        let aLStack128 = WorkModule::get_float(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
-        let LStack160 = MotionModule::rate(fighter.module_accessor);
         
-        let fVar8 = aLStack128 - LStack160;
-
-        WorkModule::set_float(fighter.module_accessor, fVar8, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
-        if fVar8 <= 0.0 {
-            let fighta = fighter.global_table[0x4].get_ptr() as *mut Fighter;
-            FighterSpecializer_Metaknight::set_special_n_ground_effect(fighta);
+        if fighter.global_table[0x16] == *SITUATION_KIND_GROUND {
+        
+            let aLStack128 = WorkModule::get_float(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
+            let LStack160 = MotionModule::rate(fighter.module_accessor);
+            
+            let fVar8 = aLStack128 - LStack160;
+    
+            WorkModule::set_float(fighter.module_accessor, fVar8, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
+            if fVar8 <= 0.0 {
+                let fighta = fighter.global_table[0x4].get_ptr() as *mut Fighter;
+                FighterSpecializer_Metaknight::set_special_n_ground_effect(fighta);
+            }
         }
     }
     0.into()
