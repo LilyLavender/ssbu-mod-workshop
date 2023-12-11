@@ -1074,7 +1074,7 @@ list:
       cancel_frame: 31
       no_stop_intp: false
   attack_11:
-    game_script: 0x13f9dbfab0
+    game_script: game_attack11_libre
     flags: 0x80
     transition: 0
     animations:
@@ -1083,7 +1083,7 @@ list:
     scripts:
       - expression_attack11
       - sound_attack11
-      - 0x15f2db7457
+      - effect_attack11_libre
     extra:
       xlu_start: 0
       xlu_end: 0
@@ -1106,7 +1106,7 @@ list:
       cancel_frame: 36
       no_stop_intp: false
   attack_s3_hi:
-    game_script: 0x1305fc2e09
+    game_script: game_attacks3_libre
     flags: 0x80
     transition: 0
     animations:
@@ -1115,14 +1115,14 @@ list:
     scripts:
       - expression_attacks3
       - sound_attacks3
-      - 0x150efca0ee
+      - effect_attacks3_libre
     extra:
       xlu_start: 0
       xlu_end: 0
       cancel_frame: 40
       no_stop_intp: false
   attack_s3_s:
-    game_script: 0x1305fc2e09
+    game_script: game_attacks3_libre
     flags: 0x80
     transition: 0
     animations:
@@ -1131,14 +1131,14 @@ list:
     scripts:
       - expression_attacks3
       - sound_attacks3
-      - 0x150efca0ee
+      - effect_attacks3_libre
     extra:
       xlu_start: 0
       xlu_end: 0
       cancel_frame: 40
       no_stop_intp: false
   attack_s3_lw:
-    game_script: 0x1305fc2e09
+    game_script: game_attacks3_libre
     flags: 0x80
     transition: 0
     animations:
@@ -1147,14 +1147,14 @@ list:
     scripts:
       - expression_attacks3
       - sound_attacks3
-      - 0x150efca0ee
+      - effect_attacks3_libre
     extra:
       xlu_start: 0
       xlu_end: 0
       cancel_frame: 40
       no_stop_intp: false
   attack_hi3:
-    game_script: 0x14b4cc7177
+    game_script: game_attackhi3_libre
     flags: 0x84
     transition: 0
     animations:
@@ -1163,14 +1163,14 @@ list:
     scripts:
       - expression_attackhi3
       - sound_attackhi3
-      - 0x168aa90622
+      - effect_attackhi3_libre
     extra:
       xlu_start: 0
       xlu_end: 0
       cancel_frame: 95
       no_stop_intp: false
   attack_lw3:
-    game_script: 0x1480110362
+    game_script: game_attacklw3_libre
     flags: 0x84
     transition: 0
     animations:
@@ -1179,7 +1179,7 @@ list:
     scripts:
       - expression_attacklw3
       - sound_attacklw3
-      - 0x16be747437
+      - effect_attacklw3_libre
     extra:
       xlu_start: 0
       xlu_end: 0
