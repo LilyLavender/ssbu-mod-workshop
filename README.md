@@ -10,23 +10,17 @@ graph LR;
     tt1([Want to know the order to watch epiosdes?])
     tt2([Check out the flowchart!])
     tt3([Note that it's currently a <em>heavy</em> WIP])
+    tt4([It can be found above the README in the file list])
 
     %% Connections
-    tt1 --- tt2 --- tt3
+    tt1 --> tt2 --> tt4
+    tt2 .-> tt3
     
     %% Classes
     classDef highlightG stroke: green
     classDef highlightR stroke: red
-    classDef link color: #00E, text-decoration: underline
-    classDef invert fill: white, stroke: black
-
     class tt1 highlightG
-    class tt2 link
-    class tt2 invert
     class tt3 highlightR
-
-    %% Links
-    click tt2 "https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/Flowchart.md"
 ```
 
 ## List of episodes and what's covered in them: 
