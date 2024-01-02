@@ -15,8 +15,8 @@ unsafe fn master_attackairn(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
 		// Changed bow to sword
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, false, -1);
-		// Sword doesn't actually have an "attack_air_n" motion
-        ArticleModule::change_motion(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, Hash40::new("attack_air_n"), false, -1.0);
+		// Sword doesn't actually have an "attack_air_n" motion, so this line won't do anything
+        //ArticleModule::change_motion(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, Hash40::new("attack_air_n"), false, -1.0);
         FighterAreaModuleImpl::enable_fix_jostle_area(agent.module_accessor, 3.0, 3.0);
     }
     frame(agent.lua_state_agent, 6.0);
