@@ -3,6 +3,17 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 
 [Here's](https://www.youtube.com/playlist?list=PLJ8C0Hk2ZKHvxjfFylRUIbVnDUvxLdejh) a link to the playlist
 
+```mermaid
+graph TD;
+    tt1([Want to know the order to watch epiosdes?]) --- tt2([Check out the <a href='https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/Flowchart.md' style='text-decoration:underline;color:#0000EE'>flowchart</a>!]);
+    tt2 --- tt3([Note that it <em>is</em> a heavy WIP])
+    
+    class tt1 highlightG;
+    classDef highlightG stroke: green;
+    class tt3 highlightR;
+    classDef highlightR stroke: red;
+```
+
 ## List of episodes and what's covered in them: 
 ### 1. Getting Started
 - Setting up a workspace to start code modding

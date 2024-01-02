@@ -60,4 +60,6 @@ graph TD;
     25---45;
     01---46;
     %% Todo: split 46 into three parts in the diagram
+
+    %% Todo: color
 ```
