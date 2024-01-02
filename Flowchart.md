@@ -8,7 +8,7 @@ graph TD;
     01---1.5([1.5]);
     01---02([02]);
     02---03;
-    1.5---03;
+    1.5---03; %% Todo: figure out if you wanna break convention and have an episode 1.5 or if you just wanna call it episode 47 but know that fewer people will then watch it
     03---04;
     04---05;
     05---06;
