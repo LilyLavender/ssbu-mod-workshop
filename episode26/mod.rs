@@ -36,7 +36,7 @@ param_hash: u64) -> i32 {
 		}
 	
 	}
-ret
+	ret
 }
 
 #[skyline::hook(offset=FLOAT_OFFSET)]
@@ -65,7 +65,7 @@ param_hash: u64) -> f32 {
         }
 		
 	}
-ret
+	ret
 }
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
