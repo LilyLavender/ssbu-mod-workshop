@@ -3,11 +3,11 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CValue, L2CAgent},
+        hash40
     },
     smash_script::*,
-    smashline::*,
+    smashline::*
 };
 
 #[acmd_script( agent = "krool", script = "game_attackhi4", category = ACMD_GAME, low_priority )]
@@ -57,31 +57,31 @@ unsafe fn krool_game_attackhi4(agent: &mut L2CAgentBase) {
     wait(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
-		StatusModule::change_status_request_from_script(agent.module_accessor, FIGHTER_STATUS_KIND_ATTACK_S3.into(), false.into());
+        StatusModule::change_status_request_from_script(agent.module_accessor, FIGHTER_STATUS_KIND_ATTACK_S3.into(), false.into());
     }
 }
 
 #[acmd_script( agent = "krool", scripts = [ "game_specialhi", "game_specialairhi" ], category = ACMD_GAME, low_priority )]
 unsafe fn krool_game_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 60.0);
-	if macros::is_excute(agent) {
-		if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-			
-			if DamageModule::damage(agent.module_accessor, 0) < 50.0 {
-				ControlModule::set_attack_air_kind(agent.module_accessor, *FIGHTER_COMMAND_ATTACK_AIR_KIND_N);
-			} else {
-				ControlModule::set_attack_air_kind(agent.module_accessor, *FIGHTER_COMMAND_ATTACK_AIR_KIND_HI);
-			} 
-			
-			StatusModule::change_status_request_from_script(agent.module_accessor, FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true);
-			
-		}
-	}
+    if macros::is_excute(agent) {
+        if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+            
+            if DamageModule::damage(agent.module_accessor, 0) < 50.0 {
+                ControlModule::set_attack_air_kind(agent.module_accessor, *FIGHTER_COMMAND_ATTACK_AIR_KIND_N);
+            } else {
+                ControlModule::set_attack_air_kind(agent.module_accessor, *FIGHTER_COMMAND_ATTACK_AIR_KIND_HI);
+            } 
+            
+            StatusModule::change_status_request_from_script(agent.module_accessor, FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true);
+            
+        }
+    }
 }
 
 pub fn install() {
     smashline::install_acmd_scripts!(
         krool_game_attackhi4,
-		krool_game_specialhi
+        krool_game_specialhi
     );
 }

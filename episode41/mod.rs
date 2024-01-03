@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CAgent, L2CValue},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -117,37 +117,37 @@ unsafe fn pikachu_effect_attacks3(agent: &mut L2CAgentBase) {
 unsafe fn pikachu_effect_attackhi3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     for _ in 0..5 {
-		if macros::is_excute(agent) {
-			macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 35, 0, 0, 0, 0, 0, 1.6, 20, 0, 20, 0, 0, 0, false);
-			macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
-		}
-		wait(agent.lua_state_agent, 3.0);
-		if macros::is_excute(agent) {
-			macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 25, 0, 0, 0, 0, 0, 1.25, 20, 0, 20, 0, 0, 0, false);
-			macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
-		}
-		wait(agent.lua_state_agent, 3.0);
-		if macros::is_excute(agent) {
-			macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 15, 0, 0, 0, 0, 0, 1, 20, 0, 20, 0, 0, 0, false);
-			macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
-		}
-		wait(agent.lua_state_agent, 3.0);
-	}
-	frame(agent.lua_state_agent, 57.0);
-	if macros::is_excute(agent) {
-		macros::EFFECT(agent, Hash40::new("sys_attack_arc"), Hash40::new("top"), 0, 12, 3, 0, -40, -90, 1.4, 0, 0, 0, 0, 0, 0, true);
-		macros::LAST_EFFECT_SET_RATE(agent, 1.4);
-	}
-	frame(agent.lua_state_agent, 60.0);
-	if macros::is_excute(agent) {
-		macros::EFFECT(agent, Hash40::new("sys_bomb_b"), Hash40::new("top"), 16, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-	}
-	frame(agent.lua_state_agent, 61.0);
-	if macros::is_excute(agent) {
-		macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-		macros::LANDING_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-		macros::LANDING_EFFECT(agent, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), -6, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
-	}
+        if macros::is_excute(agent) {
+            macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 35, 0, 0, 0, 0, 0, 1.6, 20, 0, 20, 0, 0, 0, false);
+            macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 25, 0, 0, 0, 0, 0, 1.25, 20, 0, 20, 0, 0, 0, false);
+            macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 15, 0, 0, 0, 0, 0, 1, 20, 0, 20, 0, 0, 0, false);
+            macros::LAST_EFFECT_SET_ALPHA(agent, 0.5);
+        }
+        wait(agent.lua_state_agent, 3.0);
+    }
+    frame(agent.lua_state_agent, 57.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_attack_arc"), Hash40::new("top"), 0, 12, 3, 0, -40, -90, 1.4, 0, 0, 0, 0, 0, 0, true);
+        macros::LAST_EFFECT_SET_RATE(agent, 1.4);
+    }
+    frame(agent.lua_state_agent, 60.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_bomb_b"), Hash40::new("top"), 16, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(agent.lua_state_agent, 61.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), -6, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+    }
 }
 
 #[acmd_script( agent = "pikachu", script = "effect_attacklw3_libre", category = ACMD_EFFECT, low_priority )]
@@ -165,13 +165,13 @@ unsafe fn pikachu_effect_attacklw3(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		pikachu_game_attack11,
-		pikachu_effect_attack11,
-		pikachu_game_attacks3,
-		pikachu_effect_attacks3,
-		pikachu_game_attackhi3,
-		pikachu_effect_attackhi3,
-		pikachu_game_attacklw3,
-		pikachu_effect_attacklw3,
+        pikachu_game_attack11,
+        pikachu_effect_attack11,
+        pikachu_game_attacks3,
+        pikachu_effect_attacks3,
+        pikachu_game_attackhi3,
+        pikachu_effect_attackhi3,
+        pikachu_game_attacklw3,
+        pikachu_effect_attacklw3,
     );
 }

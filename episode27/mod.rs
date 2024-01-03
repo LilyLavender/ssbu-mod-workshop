@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CValue, L2CAgent},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -26,8 +26,8 @@ unsafe fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-	    // Added search_hit on_flag
-		WorkModule::on_flag(agent.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
+        // Added search_hit on_flag
+        WorkModule::on_flag(agent.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
     }
     frame(agent.lua_state_agent, 5.5);
     if macros::is_excute(agent) {
@@ -43,8 +43,8 @@ unsafe fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 15.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
-		// Added search_hit ff_flag
-		WorkModule::off_flag(agent.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
+        // Added search_hit ff_flag
+        WorkModule::off_flag(agent.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
     }
@@ -60,32 +60,32 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let attacker_boma = sv_battle_object::module_accessor(attacker_id);
     let defender_boma = sv_battle_object::module_accessor(defender_id);
     let attacker_kind = sv_battle_object::kind(attacker_id);
-	let defender_kind = sv_battle_object::kind(defender_id);
-	// if search_hit flag is on
+    let defender_kind = sv_battle_object::kind(defender_id);
+    // if search_hit flag is on
     if WorkModule::is_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT) {
-		// add velocity
-		KineticModule::add_speed(attacker_boma, &Vector3f{ x: -3.0, y: 3.0, z: 0.0 });
-		// disable flag
-		WorkModule::off_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
-		// if thing being hit is a fighter
-		if utility::get_category(&mut *defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
-			// give fighter being hit sticky bomb
-			ItemModule::have_item(defender_boma, smash::app::ItemKind(*ITEM_KIND_CHEWING), 0, 0, false, false);
-		}
+        // add velocity
+        KineticModule::add_speed(attacker_boma, &Vector3f{ x: -3.0, y: 3.0, z: 0.0 });
+        // disable flag
+        WorkModule::off_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
+        // if thing being hit is a fighter
+        if utility::get_category(&mut *defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+            // give fighter being hit sticky bomb
+            ItemModule::have_item(defender_boma, smash::app::ItemKind(*ITEM_KIND_CHEWING), 0, 0, false, false);
+        }
     }
-	
+    
     original!()(fighter_manager, attacker_id, defender_id, move_type, arg5, move_type_again, fighter)
 }
 
 #[fighter_frame( agent = FIGHTER_KIND_RYU )]
 fn ryu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-		
-		if MotionModule::motion_kind(fighter.module_accessor) != hash40("attack_air_f") {
-			WorkModule::off_flag(fighter.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
-		}
-		
-	}
+        
+        if MotionModule::motion_kind(fighter.module_accessor) != hash40("attack_air_f") {
+            WorkModule::off_flag(fighter.module_accessor, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
+        }
+        
+    }
 }
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
@@ -106,7 +106,7 @@ static OFFSET_SEARCH_CODE: &[u8] = &[
 ];
 
 pub fn install() {
-	unsafe {
+    unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
         let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
         let text = std::slice::from_raw_parts(text_ptr, text_size);
@@ -115,12 +115,12 @@ pub fn install() {
         }
     }
     install_acmd_scripts!(
-		ryu_game_attackairf
+        ryu_game_attackairf
     );
-	skyline::install_hook!(
-		notify_log_event_collision_hit_replace
-	);
-	smashline::install_agent_frames!(
-		ryu_frame
+    skyline::install_hook!(
+        notify_log_event_collision_hit_replace
+    );
+    smashline::install_agent_frames!(
+        ryu_frame
     );
 }

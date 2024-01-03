@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CValue, L2CAgent},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -13,9 +13,9 @@ use {
 #[acmd_script( agent = "master", script = "game_attackairn", category = ACMD_GAME, low_priority )]
 unsafe fn master_game_attackairn(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-		// Changed bow to sword
+        // Changed bow to sword
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, false, -1);
-		// Sword doesn't actually have an "attack_air_n" motion, so this line won't do anything
+        // Sword doesn't actually have an "attack_air_n" motion, so this line won't do anything
         //ArticleModule::change_motion(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, Hash40::new("attack_air_n"), false, -1.0);
         FighterAreaModuleImpl::enable_fix_jostle_area(agent.module_accessor, 3.0, 3.0);
     }
@@ -46,7 +46,7 @@ unsafe fn master_game_attackairn(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 53.0);
     if macros::is_excute(agent) {
-		// Changed bow to sword
+        // Changed bow to sword
         ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
@@ -67,8 +67,8 @@ unsafe fn master_game_attacks4lw(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, 1.0);
     frame(agent.lua_state_agent, 25.0);
     if macros::is_excute(agent) {
-		// Added haveitem call
-		ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
+        // Added haveitem call
+        ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
         macros::ATTACK(agent, 1, 0, Hash40::new("top"), 11.5, 361, 90, 0, 55, 4.5, 0.0, 5.5, 6.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
         macros::ATTACK(agent, 2, 0, Hash40::new("haver"), 11.5, 361, 90, 0, 55, 1.6, 0.0, 3.0, 0.0, Some(0.0), Some(13.0), Some(0.0), 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
         macros::ATTACK(agent, 3, 0, Hash40::new("haver"), 17.25, 36, 90, 0, 60, 2.6, -0.5, 16.5, 0.0, Some(-0.5), Some(23.0), Some(0.0), 1.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_OBJECT);
@@ -85,8 +85,8 @@ unsafe fn master_game_attacks4lw(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-	smashline::install_acmd_scripts!(
+    smashline::install_acmd_scripts!(
         master_game_attackairn,
-		master_game_attacks4lw
+        master_game_attacks4lw
     );
 }

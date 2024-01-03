@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CAgent, L2CValue},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -14,7 +14,7 @@ use {
 unsafe fn samusd_game_attack12(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
-		// Does damage and knockback of jab1 to make it connect into jab3 easier
+        // Does damage and knockback of jab1 to make it connect into jab3 easier
         macros::ATTACK(agent, 0, 0, Hash40::new("armr"), 3.0, 361, 10, 0, 25, 5.0, 5.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
         macros::ATTACK(agent, 1, 0, Hash40::new("armr"), 3.0, 361, 10, 0, 25, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
         AttackModule::set_attack_height_all(agent.module_accessor, AttackHeight(*ATTACK_HEIGHT_HIGH), false);
@@ -23,8 +23,8 @@ unsafe fn samusd_game_attack12(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }
-	// Added flag to tell the game that it can transition into jab3 if the player chooses
-	frame(agent.lua_state_agent, 8.0);
+    // Added flag to tell the game that it can transition into jab3 if the player chooses
+    frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
@@ -66,8 +66,8 @@ unsafe fn samusd_effect_attack13(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		samusd_game_attack12,
-		samusd_game_attack13,
+        samusd_game_attack12,
+        samusd_game_attack13,
         samusd_effect_attack13,
     );
 }

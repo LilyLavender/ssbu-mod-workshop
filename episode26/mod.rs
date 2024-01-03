@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CValue, L2CAgent},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -20,23 +20,23 @@ boma: u64,
 param_type: u64,
 param_hash: u64) -> i32 {
     let ret = original!()(boma, param_type, param_hash);
-	let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
+    let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if param_hash == 0 {
-		
-		if fighter_kind == FIGHTER_KIND_SHULK {
+        
+        if fighter_kind == FIGHTER_KIND_SHULK {
             if color == 1 {
-				if param_type == hash40("jump_squat_frame") {
-					return 20;
-				} else if param_type == hash40("attach_wall_type") {
-					return 1;
-				} 
-			} 
-		}
-	
-	}
-	ret
+                if param_type == hash40("jump_squat_frame") {
+                    return 20;
+                } else if param_type == hash40("attach_wall_type") {
+                    return 1;
+                } 
+            } 
+        }
+    
+    }
+    ret
 }
 
 #[skyline::hook(offset=FLOAT_OFFSET)]
@@ -45,27 +45,27 @@ boma: u64,
 param_type: u64,
 param_hash: u64) -> f32 {
     let ret = original!()(boma, param_type, param_hash);
-	let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
+    let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if param_hash == 0 {
-		
-		if fighter_kind == FIGHTER_KIND_SHULK {
+        
+        if fighter_kind == FIGHTER_KIND_SHULK {
             if color == 1 {
-				if param_type == hash40("jump_y") {
-					return 100.0;
-				} else if param_type == hash40("weight") {
-					return 10000.0;
-				} else if param_type == hash40("shield_break_y") {
-					return 100.0;
-				} else if param_type == hash40("landing_attack_air_frame_f") {
-					return 100.0;
-				}
+                if param_type == hash40("jump_y") {
+                    return 100.0;
+                } else if param_type == hash40("weight") {
+                    return 10000.0;
+                } else if param_type == hash40("shield_break_y") {
+                    return 100.0;
+                } else if param_type == hash40("landing_attack_air_frame_f") {
+                    return 100.0;
+                }
             }
         }
-		
-	}
-	ret
+        
+    }
+    ret
 }
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
@@ -92,8 +92,8 @@ pub fn install() {
             FLOAT_OFFSET = offset;
         }
     }
-	skyline::install_hooks!(
-	    int_param_accessor_hook,
+    skyline::install_hooks!(
+        int_param_accessor_hook,
         float_param_accessor_hook
-	);
+    );
 }

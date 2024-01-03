@@ -3,11 +3,11 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CAgent, L2CValue},
+        hash40
     },
     smash_script::*,
-    smashline::*,
+    smashline::*
 };
 
 #[acmd_script( agent = "younglink", scripts = [ "game_appealhil", "game_appealhir", "game_appealsl", "game_appealsr", "game_appeallwl", "game_appeallwr" ], category = ACMD_GAME, low_priority )]

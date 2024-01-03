@@ -3,11 +3,11 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CAgent, L2CValue},
+        hash40
     },
     smash_script::*,
-    smashline::*,
+    smashline::*
 };
 
 #[acmd_script( agent = "jack", script = "game_attackairb", category = ACMD_GAME, low_priority )]
@@ -38,7 +38,7 @@ unsafe fn jack_game_attackairb(agent: &mut L2CAgentBase) {
         macros::ATTACK(agent, 2, 0, Hash40::new("top"), 9.0, 43, 90, 0, 54, 3.5, 0.0, 4.5, -6.5, Some(0.0), Some(7.5), Some(-5.5), 0.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
         // Added hitbox
         macros::ATTACK(agent, 3, 0, Hash40::new("top"), 12.0, 361, 100, 0, 60, 8.0, 0.0, 18.0, -18.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_BOMB, *ATTACK_REGION_BOMB);
-	}
+    }
     if WorkModule::is_flag(agent.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) {
         if macros::is_excute(agent) {
             macros::ATTACK(agent, 0, 0, Hash40::new("top"), 9.0, 35, 102, 0, 51, 5.0, 0.0, 10.5, -12.5, Some(0.0), Some(15.0), Some(-12.5), 1.3, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -71,26 +71,26 @@ unsafe fn jack_effect_attackairb(agent: &mut L2CAgentBase) {
                 macros::EFFECT_FOLLOW(agent, Hash40::new("jack_smash_arc"), Hash40::new("top"), -7, 13, -2.5, 0, 130, 115, 0.8, true);
                 macros::LAST_EFFECT_SET_RATE(agent, 1.6);
             } else {
-				if macros::is_excute(agent) {
-					macros::EFFECT_FOLLOW(agent, Hash40::new("jack_smash_arc"), Hash40::new("top"), 7, 13, -2.5, 0, 130, 65, 0.8, true);
-					macros::LAST_EFFECT_SET_RATE(agent, 1.6);
-				}
-			}
-		}
-	}
-	if macros::is_excute(agent) {
-		macros::EFFECT_FOLLOW(agent, Hash40::new("jack_knife_front"), Hash40::new("knife"), 0, 0, 0, 0, 180, 0, 1, true);
-	}
-	// Added frame 8
-	frame(agent.lua_state_agent, 8.0);
-	if macros::is_excute(agent) {
-		macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 18.0, -18.0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
-	}
-	frame(agent.lua_state_agent, 9.0);
-	if macros::is_excute(agent) {
-		macros::AFTER_IMAGE_OFF(agent, 0);
-		macros::EFFECT_OFF_KIND(agent, Hash40::new("jack_knife_front"), true, true);
-	}
+                if macros::is_excute(agent) {
+                    macros::EFFECT_FOLLOW(agent, Hash40::new("jack_smash_arc"), Hash40::new("top"), 7, 13, -2.5, 0, 130, 65, 0.8, true);
+                    macros::LAST_EFFECT_SET_RATE(agent, 1.6);
+                }
+            }
+        }
+    }
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("jack_knife_front"), Hash40::new("knife"), 0, 0, 0, 0, 180, 0, 1, true);
+    }
+    // Added frame 8
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 18.0, -18.0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        macros::AFTER_IMAGE_OFF(agent, 0);
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("jack_knife_front"), true, true);
+    }
 }
 
 #[acmd_script( agent = "jack", script = "sound_attackairb", category = ACMD_SOUND, low_priority )]
@@ -108,8 +108,8 @@ unsafe fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_jack_attackair_b01"));
     }
-	// Added frame 8
-	frame(agent.lua_state_agent, 8.0);
+    // Added frame 8
+    frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_bomb_l"));
     }
@@ -118,7 +118,7 @@ unsafe fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         jack_game_attackairb,
-		jack_effect_attackairb,
-		jack_sound_attackairb
+        jack_effect_attackairb,
+        jack_sound_attackairb
     );
 }

@@ -3,13 +3,12 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
+        lib::{lua_const::*, L2CAgent, L2CValue},
         hash40
     },
     smash_script::*,
     smashline::*
 };
-use smash::lib::L2CValue;
 
 pub const SUB_STATUS:			i32 = 0x15;
 pub const SITUATION_KIND:		i32 = 0x16;

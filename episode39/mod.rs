@@ -3,8 +3,8 @@ use {
         lua2cpp::*,
         phx::*,
         app::{sv_animcmd::*, lua_bind::*, *},
-        lib::lua_const::*,
-		hash40
+        lib::{lua_const::*, L2CAgent, L2CValue},
+        hash40
     },
     smash_script::*,
     smashline::*
@@ -13,17 +13,17 @@ use {
 #[fighter_frame( agent = FIGHTER_KIND_LITTLEMAC )]
 fn littlemac_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-		let motion = MotionModule::motion_kind(fighter.module_accessor);
-		let motion_frame = MotionModule::frame(fighter.module_accessor);
-		if motion == smash::hash40("attack_air_f") && // If current animation is "attack_air_f"
-		motion_frame >= 2.0 && motion_frame <= 18.0 { // If between frames 2 and 18 inclusive
+        let motion = MotionModule::motion_kind(fighter.module_accessor);
+        let motion_frame = MotionModule::frame(fighter.module_accessor);
+        if motion == smash::hash40("attack_air_f") && // If current animation is "attack_air_f"
+        motion_frame >= 2.0 && motion_frame <= 18.0 { // If between frames 2 and 18 inclusive
             // Show sword
-			ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("chrom_sword"), true);
-		} else {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("chrom_sword"), true);
+        } else {
             // Hide sword
-			ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("chrom_sword"), false);
-		}
-	}
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("chrom_sword"), false);
+        }
+    }
 }
 
 #[acmd_script( agent = "littlemac", script = "game_attackairf", category = ACMD_GAME, low_priority )]
@@ -65,11 +65,11 @@ unsafe fn littlemac_effect_attackairf(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-	smashline::install_acmd_scripts!(
+    smashline::install_acmd_scripts!(
         littlemac_game_attackairf,
-		littlemac_effect_attackairf,
+        littlemac_effect_attackairf,
     );
-	smashline::install_agent_frames!(
-		littlemac_frame,
+    smashline::install_agent_frames!(
+        littlemac_frame,
     );
 }
