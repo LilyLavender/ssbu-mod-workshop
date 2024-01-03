@@ -28,5 +28,5 @@ fn dedede_frame(fighter: &mut L2CFighterCommon) {
 pub fn install() {
 	smashline::install_agent_frames!(
 		dedede_frame
-    );
+  );
 }

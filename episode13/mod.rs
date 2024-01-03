@@ -15,7 +15,7 @@ static mut paluPosY: [f32; 8] = [0.0; 8];
 static mut paluPosZ: [f32; 8] = [0.0; 8];
 
 #[acmd_script( agent = "palutena", scripts = [ "game_appealhil", "game_appealhir" ], category = ACMD_GAME, low_priority )]
-unsafe fn palutena_appealhi(agent: &mut L2CAgentBase) {
+unsafe fn palutena_game_appealhi(agent: &mut L2CAgentBase) {
 	// Get player number
     let entry_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if macros::is_excute(agent) {
@@ -28,7 +28,7 @@ unsafe fn palutena_appealhi(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "palutena", scripts = [ "game_appeallwl", "game_appeallwr" ], category = ACMD_GAME, low_priority )]
-unsafe fn palutena_appeallw(agent: &mut L2CAgentBase) {
+unsafe fn palutena_game_appeallw(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if macros::is_excute(agent) {
 		paluPosX[entry_id] = PostureModule::pos_x(agent.module_accessor);
@@ -39,7 +39,7 @@ unsafe fn palutena_appeallw(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        palutena_appealhi,
-		palutena_appeallw
+        palutena_game_appealhi,
+		palutena_game_appeallw
     );
 }

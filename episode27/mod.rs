@@ -17,7 +17,7 @@ static mut NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x675A20;
 const FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT : i32 = 0x200000eb;
 
 #[acmd_script( agent = "ryu", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn ryu_attackairf(agent: &mut L2CAgentBase) {
+unsafe fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
@@ -115,12 +115,12 @@ pub fn install() {
         }
     }
     install_acmd_scripts!(
-		ryu_attackairf,
+		ryu_game_attackairf
     );
 	skyline::install_hook!(
 		notify_log_event_collision_hit_replace
 	);
 	smashline::install_agent_frames!(
-		ryu_frame,
+		ryu_frame
     );
 }

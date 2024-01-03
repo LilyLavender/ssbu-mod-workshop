@@ -11,7 +11,7 @@ use {
 };
 
 #[acmd_script( agent = "cloud", script = "game_attackhi3", category = ACMD_GAME, low_priority )]
-unsafe fn cloud_attackhi3(agent: &mut L2CAgentBase) {
+unsafe fn cloud_game_attackhi3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
 		// Random number 40 to 139
@@ -33,7 +33,7 @@ unsafe fn cloud_attackhi3(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "cloud", script = "game_attacks4", category = ACMD_GAME, low_priority )]
-unsafe fn cloud_attacks4(agent: &mut L2CAgentBase) {
+unsafe fn cloud_game_attacks4(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -81,7 +81,7 @@ unsafe fn cloud_attacks4(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        cloud_attackhi3,
-		cloud_attacks4
+        cloud_game_attackhi3,
+		cloud_game_attacks4
     );
 }

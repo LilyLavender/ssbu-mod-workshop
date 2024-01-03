@@ -11,7 +11,7 @@ use {
 };
 
 #[acmd_script( agent = "purin", script = "game_attackhi3", category = ACMD_GAME, low_priority )]
-unsafe fn purin_attackhi3(agent: &mut L2CAgentBase) {
+unsafe fn purin_game_attackhi3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
 		// Add 8%
@@ -31,7 +31,7 @@ unsafe fn purin_attackhi3(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "purin", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn purin_attacklw3(agent: &mut L2CAgentBase) {
+unsafe fn purin_game_attacklw3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
 		// Hey, uh, don't do this actually. Ok?
@@ -54,7 +54,7 @@ unsafe fn purin_attacklw3(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "purin", script = "game_attackairhi", category = ACMD_GAME, low_priority )]
-unsafe fn purin_attackairhi(agent: &mut L2CAgentBase) {
+unsafe fn purin_game_attackairhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -79,8 +79,8 @@ unsafe fn purin_attackairhi(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        purin_attackairhi,
-		purin_attackhi3,
-		purin_attacklw3,
+        purin_game_attackhi3,
+		purin_game_attacklw3,
+		purin_game_attackairhi
     );
 }

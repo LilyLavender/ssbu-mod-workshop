@@ -12,7 +12,7 @@ use {
 
 // Multple scripts are edited at once with the bracketed section
 #[acmd_script( agent = "zelda", scripts = [ "game_appealhil", "game_appealhir" ], category = ACMD_GAME, low_priority )]
-unsafe fn zelda_appealhi(agent: &mut L2CAgentBase) {
+unsafe fn zelda_game_appealhi(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
 		if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) { // A
@@ -45,6 +45,6 @@ unsafe fn zelda_appealhi(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        zelda_appealhi
+        zelda_game_appealhi
     );
 }

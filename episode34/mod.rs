@@ -19,6 +19,6 @@ unsafe fn younglink_game_appeal(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        younglink_game_appeal,
+        younglink_game_appeal
     );
 }

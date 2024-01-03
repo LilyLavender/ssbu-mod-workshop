@@ -71,7 +71,7 @@ unsafe fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[acmd_script( agent = "ridley", script = "game_specialhi", category = ACMD_GAME, low_priority )]
-unsafe fn ridley_specialhi(agent: &mut L2CAgentBase) {
+unsafe fn ridley_game_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -117,7 +117,7 @@ unsafe fn ridley_specialhi(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "ridley", script = "game_specialairhi", category = ACMD_GAME, low_priority )]
-unsafe fn ridley_specialairhi(agent: &mut L2CAgentBase) {
+unsafe fn ridley_game_specialairhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -163,7 +163,7 @@ unsafe fn ridley_specialairhi(agent: &mut L2CAgentBase) {
 }
 
 #[acmd_script( agent = "ridley", script = "effect_specialhi", category = ACMD_EFFECT, low_priority )]
-unsafe fn ridley_specialhi_fx(agent: &mut L2CAgentBase) {
+unsafe fn ridley_effect_specialhi(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FLW_POS(agent, Hash40::new("plizardon_sorawotobu_flash"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
     }
@@ -193,7 +193,7 @@ if macros::is_excute(agent) {
 }
 
 #[acmd_script( agent = "ridley", script = "effect_specialairhi", category = ACMD_EFFECT, low_priority )]
-unsafe fn ridley_specialairhi_fx(agent: &mut L2CAgentBase) {
+unsafe fn ridley_effect_specialairhi(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FLW_POS(agent, Hash40::new("plizardon_sorawotobu_flash"), Hash40::new("top"), 0, -3, 0, 0, 0, 0, 1, true);
     }
@@ -219,10 +219,10 @@ if macros::is_excute(agent) {
 }
 pub fn install() {
 	smashline::install_acmd_scripts!(
-        ridley_specialairhi,
-		ridley_specialairhi_fx,
-		ridley_specialhi,
-		ridley_specialhi_fx,
+        ridley_game_specialairhi,
+		ridley_effect_specialairhi,
+		ridley_game_specialhi,
+		ridley_effect_specialhi,
     );
 	smashline::install_status_scripts!(
 		ridley_specialhi_main,
