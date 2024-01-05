@@ -6,7 +6,7 @@ Replace the text in the left column with the corresponding in the right column. 
 | ---: | --- | --- |
 | `double space` | `\t` | In VSCode, make sure to activate regex |
 | `this->moduleAccessor` | `fighter.module_accessor` |
-| `__` | `::` |
+| `__` | `::` | Note that that's two underscores |
 | `_impl` |
 | `app::lua_bind::` |
 | `(float)` |
