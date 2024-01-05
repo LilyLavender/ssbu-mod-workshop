@@ -16,15 +16,10 @@ graph TD;
     %% Declarations
     tt1{{Flowchart is currently a WIP}}
     tt2[(Outlines:)]
-    tt3[Green outlines are episodes 
-    I've deemed incredibly useful]
-    tt4[Orange outlines denote highly recommended, 
-    but optional episodes]
+    tt3[Green outlines are episodes <br>I've deemed incredibly useful]
+    tt4[Orange outlines denote highly recommended, <br>but optional episodes]
     tt5[Red outlines are advanced topics]
-    %% Todo: Add some notes about 1. where to start 
-    %% and 2. how some episodes aren't technically needed 
-    %% (ie 06 prereq for 40) but are just recommended based on 
-    %% the amount of knowledge you should have (try dotted lines?)
+    %% Todo: Add some notes about 1. where to start <br>%% and 2. how some episodes aren't technically needed <br>%% (ie 06 prereq for 40) but are just recommended based on <br>%% the amount of knowledge you should have (try dotted lines?)
 
     %% Connections
     tt1 --> tt2
@@ -66,16 +61,12 @@ graph TD;
     22([22. Items/Articles])
     23([23. Visibility])
     24([24. Slotting Pt.1])
-    25([25. Hooking 
-    Functions])
+    25([25. Hooking <br>Functions])
     26([26. Parameters])
     27([27. Hit Detection])
-    28([28. Mass 
-    Hitbox Editing])
-    29([29. Ghidra Pt.1 - 
-    Getting Scripts])
-    30([30. Ghidra Pt.2 - 
-    Translating])
+    28([28. Mass <br>Hitbox Editing])
+    29([29. Ghidra Pt.1 - <br>Getting Scripts])
+    30([30. Ghidra Pt.2 - <br>Translating])
     31([31. Resources Pt.2])
     32([32. Sounds])
     33([33. Expressions])
@@ -85,25 +76,19 @@ graph TD;
     37([37. println])
     38([38. Adding Moves])
     39([39. Adding Swords])
-    40.1([40p1. Adding 
-    Sword Trails])
-    40.2([40p2. Changing Sword 
-    Trails in Real Time])
+    40.1([40p1. Adding <br>Sword Trails])
+    40.2([40p2. Changing Sword <br>Trails in Real Time])
     41([41. Slotting Pt.2])
-    42([42. Ghidra Pt.3 - 
-    goto/LAB_])
-    43([43. Ghidra Pt.4 - 
-    FUN_])
+    42([42. Ghidra Pt.3 - <br>goto/LAB_])
+    43([43. Ghidra Pt.4 - <br>FUN_])
     44([44. Projectiles])
     45([45. Command Inputs])
-    46.1([46p1. Smashline 2 
-    Basics])
+    46.1([46p1. Smashline 2 <br>Basics])
     46.2([46p2. Article
     Addition])
     46.3([46p3. Transplanting
     Effects])
-    47([47. Setting Up 
-    Rust Analyzer])
+    47([47. Setting Up <br>Rust Analyzer])
 
     %% Connections
     %%ttStart{{Start Here!}}:::hlW--- don't know if I like this or not yet
