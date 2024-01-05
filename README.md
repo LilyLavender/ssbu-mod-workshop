@@ -5,22 +5,27 @@ The Smash Ultimate Mod Workshop is the series where I go over everything from ge
 
 ## Flowchart
 ```mermaid
-graph LR;
-    %% Declarations
-    tt1([Want to know the order to watch epiosdes?])
-    tt2([Check out the flowchart!])
-    tt3([Note that it's currently a <em>heavy</em> WIP])
+graph TD;
+    %% Class Declarations
+    classDef default stroke-width:2.5px;
+    classDef toolTip fill: #333, stroke: black
+    classDef hlG stroke: green
+    classDef hlR stroke: red
+
+    %% Node Declarations
+    tt1{{Want to know the order to watch epiosdes in?}}
+    tt2[Check out the flowchart!]
+    tt3([Please note that it's currently a WIP])
     tt4([It can be found above the README in the file list])
 
     %% Connections
     tt1 --> tt2 --> tt4
     tt2 .-> tt3
     
-    %% Classes
-    classDef highlightG stroke: green
-    classDef highlightR stroke: red
-    class tt1 highlightG
-    class tt3 highlightR
+    %% Class Additions
+    class tt1,tt2,tt3,tt4 toolTip
+    class tt1 hlG
+    class tt3 hlR
 ```
 
 ## List of episodes and what's covered in them: 
