@@ -56,10 +56,31 @@ unsafe extern "C" fn chrom_lightbeam_effect_regular(agent: &mut L2CAgentBase) {
     }
 }
 
+unsafe extern "C" fn chrom_effect_attack11(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::FOOT_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("tex_chrom_sword1"), Hash40::new("tex_chrom_sword2"), 4, Hash40::new("sword1"), 0.0, 0.0, 1.65, Hash40::new("sword1"), -0.0, -0.0, 12.4, true, Hash40::new("chrom_sword"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0 as u64, *EFFECT_AXIS_X, 0 as u64, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
+        // Added mythra effect
+        macros::EFFECT(agent, Hash40::new("elight_attack100_finish"), Hash40::new("top"), 0, 10, 13, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::AFTER_IMAGE_OFF(agent, 4);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("chrom_sword"), false, false);
+    }
+}
+
 pub fn install() {
 	Agent::new("chrom")
 		.game_acmd("game_specials1", chrom_game_specials1)
         .game_acmd("game_specialairs1", chrom_game_specials1)
+        .effect_acmd("effect_attack11", chrom_effect_attack11)
 		.install();
     Agent::new("chrom_lightbeam")
         .game_acmd("game_regular", chrom_lightbeam_game_regular)
