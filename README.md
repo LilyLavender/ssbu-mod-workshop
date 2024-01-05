@@ -259,4 +259,9 @@ graph TD;
 - fighter.global_table[0x3C]
 - .assign()
 ### 46. Smashline 2
+- Migrating from smashline 1 to 2
+- Cloning articles
+- Transplanting effects
+- Using param-xml to edit vl.prc
+### 47. Setting Up Rust Analyzer
 - WIP
