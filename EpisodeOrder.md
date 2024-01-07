@@ -85,15 +85,15 @@ graph TD;
     46.1([46p1. Smashline 2 \n Basics]):::hlG
     46.2([46p2. Article \n Addition]):::hlR
     46.3([46p3. Transplanting \n Effects]):::hlG
-    47([47. Setting Up \n Rust Analyzer]):::hlY
+    %%47([47. Setting Up \n Rust Analyzer]):::hlY
 
     %% Connections
     %%ttStart{{Start Here!}}:::hlW--- don't know if I like this or not yet
     00---01
-    01---47
+    %%01---47
     01---02
     02---03
-    47---03
+    %%47---03
     03---04
     04---05
     05---06
