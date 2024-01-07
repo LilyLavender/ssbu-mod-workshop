@@ -1,14 +1,14 @@
 ## List of Every Collision Attribute and Usage
- If anyone wants to help with the ones that need testing, please send me pictures of how they differ from similar effects and if they can only be used by specific characters or not, if applicable (eg palutena_bullet, jack_bullet)
+ If anyone wants to help with the ones that need testing, please send me pictures of how they differ from similar effects and if they can only be used by specific characters or not, if applicable (eg palutena_bullet, jack_final)
 
 - **collision_attr_aura** = Purely visual effect on most of Lucario's moves
 - **collision_attr_bind** = Shieldbreak confused state. Only works on ground
-- **collision_attr_bind_extra** = 📝 Todo: figure out the difference between this and normal bind. Used only on Mewtwo down b and Marshadow
+- **collision_attr_bind_extra** = Like bind, but uses a different mashing formula to make it harder to mash
 - **collision_attr_blaster_throw_down** = Exclusively used on fox down throw 
 - **collision_attr_blaster_throw_up** = Exclusively used on fox up throw
 - **collision_attr_bury** = Bury (eg. DK side b, K. Rool down tilt). Only works on ground
 - **collision_attr_bury_r** = Bury, but for throws.  Only works on ground
-- **collision_attr_coin** = Mario Up B
+- **collision_attr_coin** = Summons a purely-visual coin. Used exclusively on Mario up b
 - **collision_attr_curse_poison** = Used exclusively on Joker side b
 - **collision_attr_cutup** = Purely visual effect used on sword slashes
 - **collision_attr_cutup_metal** = Used exclusively on Hero metal slash, probably purely visual but needs testing
@@ -27,7 +27,7 @@
 - **collision_attr_leviathan_wave** = 📝 Needs testing
 - **collision_attr_leviathan_wave_owner** = 📝 Needs testing
 - **collision_attr_magic** = Basic magic hit effect, eg Zelda jab, Ness uair
-- **collision_attr_mario_local_coin** = 📝 Also only used on Mario up b. Needs testing
+- **collision_attr_mario_local_coin** = Like coin, but it summons the purple coins from Odyssey instead of yellow ones
 - **collision_attr_marth_shield_breaker** = 📝 Needs testing
 - **collision_attr_noamal** = Mispelling, does nothing, used exclusively on G&W down smash
 - **collision_attr_none** = No visual effect
@@ -57,4 +57,6 @@
 - **collision_attr_turn** = Turns target around, eg Mario cape, Mii Swordfighter reversal slash
 - **collision_attr_water** = Basic water hit effect, eg Squirtle down smash, Corrin up b
 - **collision_attr_whip** = 📝 Belmont whip
-- **0x193bdcb0cc** = 📝 The last uncracked collision_attr hash. Most likely `collision_attr_auto_shift`. Used in Kazuya's jabs most likely to move the player over a little bit to continue the combo
+- **0x193bdcb0cc** = 📝 Uncracked hash. Most likely `collision_attr_auto_shift`. Used in Kazuya's jabs most likely to move the player over a little bit to continue the combo
+- **0x19f2214801** = 📝 Uncracked hash. Used in Kazuya's uncrouching attack most likely as a special type of crumple
+- **0x184c223f47** = 📝 Uncracked hash. Used in Kazuya's side b most likely as a special type of crumple
