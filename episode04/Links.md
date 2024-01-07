@@ -1,5 +1,5 @@
 ## Every Link Shown Off in Episode 4
-##### See also: [Episode 31's Links](https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/episode31/links.md)
+##### See also: [Episode 31's Links](https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/episode31/Links.md)
 
 1) [Wuboy's Script Dump](https://github.com/WuBoytH/SSBU-Dumped-Scripts/tree/main/smashline)
 2) cpp & lua_const files - C:\Users\USERNAME\\.cargo\git\checkouts\skyline-smash-714c6bb550307c21\6c406d3\src

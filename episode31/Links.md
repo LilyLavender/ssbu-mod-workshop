@@ -1,5 +1,5 @@
 ## Every Link Shown Off in Episode 31
-##### See also: [Episode 4's Links](https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/episode04/links.md)
+##### See also: [Episode 4's Links](https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/episode04/Links.md)
 
 1) [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/intro.html)
 2) [Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021)
