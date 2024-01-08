@@ -21,10 +21,12 @@ graph TD;
     %% Todo: Add some notes about where to start 
 
     %% Connections
-    tt1 --> tt2
-    tt2 --- tt3
-    tt2 --- tt4
-    tt2 --- tt5
+    subgraph identifier[" "]
+        tt1 --> tt2
+        tt2 --- tt3
+        tt2 --- tt4
+        tt2 --- tt5
+    end
 
     %% Class Additions
     class tt1,tt2,tt3,tt4,tt5 toolTip

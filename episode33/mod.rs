@@ -36,6 +36,6 @@ unsafe fn lucina_expression_attacklw3(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        lucina_expression_attacklw3,
+        lucina_expression_attacklw3
     );
 }
