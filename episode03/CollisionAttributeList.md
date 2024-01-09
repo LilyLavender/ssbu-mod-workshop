@@ -4,6 +4,7 @@
  <!-- WIP: Instructions on helping with unknowns. -->
  
 - **collision_attr_aura** = A visual effect primarily used on Lucario's moves.
+- **collision_attr_auto_shift/0x193bdcb0cc** = 📝 A hit effect used in most of Kazuya's Jabs that most likely moves the player over a little bit to continue the combo. <!-- Need a general description of what it looks like and how it functions. If it's similar to another hit effect, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
 - **collision_attr_bind** = Inflicts the dizzy status (eg. shield breaks). Only works on ground.
 - **collision_attr_bind_extra** = Inflicts a variant on the dizzy effect that calls to different params in common.prc. Used in Mewtwo's Disable and Marshadow. 
 - **collision_attr_blaster_throw_down** = 📝 An effect that is only used on Fox's Down Throw. <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. -->
@@ -20,6 +21,9 @@
 - **collision_attr_elec** = A visual effect that emits sparks. Causes the attacker to take 1.5x hitlag frames. Used on electric moves like Pichu Fair and Ganon Jab.
 - **collision_attr_elec_whip** = A variant on the electric effect where the visual effect lasts less time. Only used on Samus and Dark Samus's Throws.
 - **collision_attr_fire** = A visual effect that emits flames. Used on fire moves like Mario's Fireball and Steve's Up Smash.
+- **collision_attr_fist_down/0x184c223f47** = 📝 Used only in Kazuya's Side Special. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
+- **collision_attr_fist_down2/0x19f2214801** = 📝 Used only in Kazuya's Uncrouching Attack. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
+- **collision_attr_fist_down3/0x1985267897** = 📝 Used only in Kazuya's Jab 9. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
 - **collision_attr_flower** = Inflicts the flower status, which puts a flower on the opponent's head. Used with Jigglypuff's Rest and the flower item.
 - **collision_attr_head_mushroom** = Inflicts the mushroom status, which puts a mushroom on the opponent's head. Used exclusively on the Ramblin' Evil Mushroom item.
 - **collision_attr_ice** = Inflicts the frozen status. Used on ice moves like Kacrackle Slash and Ice Climbers Down Special.
@@ -61,8 +65,4 @@
 - **collision_attr_turn** = A hit effect that turns the opponent around. Used on moves like Mario's Cape and Mii Swordfighter's Reversal Slash.
 - **collision_attr_water** = A visual effect that emits water particles. Used on moves like Squirtle's Down Smash and Corrin's Up Special.
 - **collision_attr_whip** = A visual effect similar to the stab/sting effects. Used on Simon/Richter's Whip Moves.
-- **0x193bdcb0cc/collision_attr_auto_shift** = 📝 A hit effect used in most of Kazuya's Jabs that most likely moves the player over a little bit to continue the combo. <!-- Need a general description of what it looks like and how it functions. If it's similar to another hit effect, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
-- **0x184c223f47/collision_attr_fist_down** = 📝 Used only in Kazuya's Side Special. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
-- **0x19f2214801/collision_attr_fist_down2** = 📝 Used only in Kazuya's Uncrouching Attack. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
-- **0x1985267897/collision_attr_fist_down3** = 📝 Used only in Kazuya's Jab 9. Most likely a special type of crumple. <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
 <!-- crush = In PhazoGanon's words: "Apparently there's also an effect called crush. Which happens on stages like Midgar and Distant Planet. And it's also an instant KO". Figure out if this exists, dump some scripts that use it. Unsure if 0x145f286b64/collision_attr_crush exists or if the attribute uses an alternate name. Midgar's crush is probably the stage coming together to kill the player, and for Distant Planet, the Bulborb closing its mouth. Unsure is this is just death or not, would have to look into stage hitboxes. -->
