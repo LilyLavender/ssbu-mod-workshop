@@ -1,5 +1,8 @@
 {
     "new-dir-files": {
+		"fighter/chrom/cmn": [
+            "effect/fighter/chrom/transplant/elight/ef_elight.eff"
+        ],
 		"fighter/chrom/c00": [
             "fighter/chrom/model/lightbeam/c00/dark_model.numatb",
 			"fighter/chrom/model/lightbeam/c00/light_model.numatb",
@@ -119,9 +122,6 @@
 			"fighter/chrom/motion/lightbeam/c07/main.nuanmb",
 			"fighter/chrom/motion/lightbeam/c07/motion_list.bin",
 			"fighter/chrom/motion/lightbeam/c07/update.prc"
-        ],
-		"fighter/chrom/cmn": [
-            "effect/fighter/chrom/transplant/elight/ef_elight.eff"
         ]
     }
 }
