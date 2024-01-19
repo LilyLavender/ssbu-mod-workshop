@@ -15,10 +15,7 @@ static mut INT_OFFSET : usize = 0x4ded80;
 static mut FLOAT_OFFSET : usize = 0x4dedc0;
 
 #[skyline::hook(offset=INT_OFFSET)]
-pub unsafe fn int_param_accessor_hook(
-boma: u64,
-param_type: u64,
-param_hash: u64) -> i32 {
+pub unsafe fn int_param_accessor_hook(boma: u64, param_type: u64, param_hash: u64) -> i32 {
     let ret = original!()(boma, param_type, param_hash);
     let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
@@ -40,10 +37,7 @@ param_hash: u64) -> i32 {
 }
 
 #[skyline::hook(offset=FLOAT_OFFSET)]
-pub unsafe fn float_param_accessor_hook(
-boma: u64,
-param_type: u64,
-param_hash: u64) -> f32 {
+pub unsafe fn float_param_accessor_hook(boma: u64, param_type: u64, param_hash: u64) -> f32 {
     let ret = original!()(boma, param_type, param_hash);
     let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
