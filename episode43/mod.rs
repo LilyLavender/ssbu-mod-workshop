@@ -38,7 +38,6 @@ unsafe fn metaknight_specialnspin_main(fighter: &mut L2CFighterCommon) -> L2CVal
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     if stick_x.abs() >= add_speed_stick { // 0.8
         let facing = PostureModule::lr(fighter.module_accessor);
-        //let final_x_speed = start_stick_speed * facing;
         let final_x_speed = start_stick_speed * stick_x * facing;
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{ x: final_x_speed, y: 0.0, z: 0.0 });
     }
@@ -113,13 +112,13 @@ unsafe extern "C" fn FUN_710001ca30(fighter: &mut L2CFighterCommon, param_3: L2C
         
         if fighter.global_table[0x16] == *SITUATION_KIND_GROUND {
         
-            let aLStack128 = WorkModule::get_float(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
-            let LStack160 = MotionModule::rate(fighter.module_accessor);
+            let ground_effect_counter = WorkModule::get_float(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
+            let rate = MotionModule::rate(fighter.module_accessor);
             
-            let fVar8 = aLStack128 - LStack160;
+            let gfx_count_final = ground_effect_counter - rate;
     
             WorkModule::set_float(fighter.module_accessor, fVar8, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_FLOAT_GROUND_EFFECT_COUNTER);
-            if fVar8 <= 0.0 {
+            if gfx_count_final <= 0.0 {
                 let fighta = fighter.global_table[0x4].get_ptr() as *mut Fighter;
                 FighterSpecializer_Metaknight::set_special_n_ground_effect(fighta);
             }
