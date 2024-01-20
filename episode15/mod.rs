@@ -42,6 +42,7 @@ fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
         } else if gaoMode[entry_id] == 2 { // Intangibily (moves can't connect)
             macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU); 
         } else if gaoMode[entry_id] == 3 { // Super Armor
+            // DAMAGE_NO_REACTION_MODE_ALWAYS means that the armor will never break. To do damage-based armor, set the 3rd argument to "DAMAGE_NO_REACTION_MODE_DAMAGE_POWER" and the 4th to the max damage of the armor.
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0); 
         }
         
