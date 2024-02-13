@@ -2,7 +2,6 @@
 List by LilyLambda, PhazoGanon, & zrksyd.  
 An easier-to-copy-paste list can be found [here](https://github.com/ultimate-research/param-labels/blob/master/ParamLabels.csv).  
 Collision Attributes with "📝" require more testing. If anyone wants to help, there's comments in this doc that will have general and per-move instructions.
- <!-- WIP: Instructions on helping with unknowns. -->
 
 | Hash | Text | Description | Type | 
 | --- | --- | --- | --- |
@@ -18,25 +17,25 @@ Collision Attributes with "📝" require more testing. If anyone wants to help, 
 | 0x13b3061dd0 | collision_attr_coin | Spawns a coin effect. Used on Mario's Super Jump Punch. | Visual |
 | 0x1b2fb009bf | collision_attr_curse_poison | A damage over time effect used on Joker's Eiha/Eigaon. | Hit |
 | 0x14860b063a | collision_attr_cutup | A crescent-shaped effect used on sword slashes. | Visual |
-| 0x1a5242290d | collision_attr_cutup_metal | A variant on the cutup effect that instantly KO's metal opponents. Exclusively on Hero's Metal Slash. | Hit | 
+| 0x1a5242290d | collision_attr_cutup_metal | A variant on the cutup effect that instantly KOs metal opponents. Used exclusively on Hero's Metal Slash. | Hit | 
 | 0x1474a84539 | collision_attr_death | Instantly KOs the opponent. | Hit |
-| 0x18bef6339f | collision_attr_deathball | 📝 Similar to the instant KO effect. Used on Hero's Whack/Thwack, but always instakills when applied to other hitboxes, likely due to not being able to call to a Hero-specific function to determine when it'll KO. | Hit | <!-- Find the alleged Hero-specific function and, if possible, find a way to port it to other characters. -->
+| 0x18bef6339f | collision_attr_deathball | 📝 Similar to death. Used on Hero's Whack/Thwack, but always instakills when applied to other hitboxes, likely due to not being able to call to a Hero-specific function to determine when it should KO. | Hit | <!-- Find the alleged Hero-specific function and, if possible, find a way to port it to other characters or prove that it's impossible. -->
 | 0x1a5f94f889 | collision_attr_deathscythe | 📝 Most likely used on the Death's Scythe item. Needs testing | Unknown | <!-- Find out if this is purely visual or not and how it functions -->
 | 0x1c6d20b1f9 | collision_attr_dedede_hammer | 📝 Differs only slightly from the normal hit effect. Used on all of Dedede's moves that use his hammer, sans Down B. | Visual | <!-- Need a general description of what it looks like. If it actually is identical to the normal hit effect, or a different one, state so. -->
-| 0x19fa8a1d82 | collision_attr_deep_sleep | 📝 No hit effects. | Unknown
+| 0x19fa8a1d82 | collision_attr_deep_sleep | 📝 No hit effects. | Unknown | <!-- zrksyd did some testing and found this didn't have any hit effects. If someone could find out why, that would be great. -->
 | 0x13462fcfe4 | collision_attr_elec | Emits sparks and causes the attacker to take 1.5x hitlag frames. Used on electric moves like Pichu Fair and Ganondorf Jab. | Hit |
 | 0x184e3f7a79 | collision_attr_elec_whip | A variant on the electric effect where the visual effect has a shorter duration. Only used on Samus and Dark Samus's Throws. | Hit |
 | 0x13beb18342 | collision_attr_fire | Emits flames. Used on fire moves like Mario's Fireball and Steve's Up Smash. | Visual |
 | 0x184c223f47 | collision_attr_fist_down | 📝 Used only in Kazuya's Devil Fist. Most likely a special type of crumple. | Hit | <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
 | 0x19f2214801 | collision_attr_fist_down2 | 📝 Used only in Kazuya's Demon God Fist. Most likely a special type of crumple. | Hit | <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
 | 0x1985267897 | collision_attr_fist_down3 | 📝 Used only in Kazuya's 9th hit of 10-Hit Combo. Most likely a special type of crumple. | Hit | <!-- Need a general description of what it looks like and how it functions. If it's similar to saving, mention how it differs. Remains in here until WuBoy's script dump stops using the hash. -->
-| 0x152497ab8d | collision_attr_flower | Inflicts the flower status, which puts a flower on the opponent's head. Used with Jigglypuff's Rest and the Lip's Stick. | Hit |
-| 0x143be20fe4 | collision_attr_grass | 📝 A variant of the cutup effect. Likely a remnant from *Brawl*. | Visual | <!-- See if there are any differences with cutup, whether purely visually or if there's mechanical differences. -->
+| 0x152497ab8d | collision_attr_flower | Inflicts the flower status, which puts a flower on the opponent's head. Used with Jigglypuff's Rest and the Lip's Stick item. | Hit |
+| 0x143be20fe4 | collision_attr_grass | 📝 A variant of the cutup effect. Likely a remnant from *Brawl*. | Visual | <!-- See if there are any differences with cutup, whether purely visually or if there's mechanical differences. Guarantee that it doesn't have brawl's type-effectiveness aspect. Highly doubt it, but you never know. -->
 | 0x15a03a1c5c | collision_attr_grudge | 📝 A variant of the purple effect. | Unknown | <!-- See if there are any differences with purple, whether purely visually or if there's mechanical differences. -->
 | 0x1c655b0ae7 | collision_attr_head_mushroom | Inflicts the mushroom status, which puts a mushroom on the opponent's head. Used exclusively on the Ramblin' Evil Mushroom item. | Hit |
 | 0x12c7990841 | collision_attr_ice | Inflicts the frozen status. Used on ice moves like Hero's Kacrackle Slash and Ice Climbers' Blizzard. | Hit |
-| 0x169c2f9aa4 | collision_attr_ink_hit | 📝 Coats the opponent in Ink. Used on Inkling's moves and Master Hand's Paint Ball move. | Unknown | <!-- I'm skeptical that the visual effect is what coats the opponent. If it is, see if there's any other visual effects to accompany it. -->
-| 0x1ae690bd0d | collision_attr_item_hammer | Only used on the Hammer and Golden Hammer items. Produces visual effects from the Donkey Kong arcade. | Visual | <!-- Find out if this is purely visual or not and how it functions -->
+| 0x169c2f9aa4 | collision_attr_ink_hit | 📝 Coats the opponent in Ink. Used on Inkling's moves and Master Hand's Paint Ball. | Unknown | <!-- I'm skeptical that the visual effect is what coats the opponent. If it is, see if there's any other visual effects to accompany it. -->
+| 0x1ae690bd0d | collision_attr_item_hammer | 📝 Only used on the Hammer and Golden Hammer items. Produces visual effects from the Donkey Kong arcade. | Visual | <!-- Find out if this is purely visual or not and how it functions -->
 | 0x1a6f665bee | collision_attr_jack_bullet | 📝 Only used on Joker's Gun, needs testing. | Unknown | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. May also have additional effects. -->
 | 0x19f9ff23e4 | collision_attr_jack_final | 📝 Only used on Joker's Final Smash, needs testing. | Unknown | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. May also have additional effects. -->
 | 0x13f8ba5588 | collision_attr_kick | 📝 No hit effects, only used on Galleom's Lariat. | Unknown | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. May also have additional effects. -->
@@ -65,10 +64,10 @@ Collision Attributes with "📝" require more testing. If anyone wants to help, 
 | 0x1537b0b1f0 | collision_attr_search | 📝 Used on the searchboxes of Falcon's Raptor Boost and Pit's Upperdash Dash. | Unknown | <!-- Need a general description of what it looks like. Most likely doesn't have any visual effects, but if it's similar to another hit effect, mention how it differs. Most likely has additional effects. -->
 | 0x149cdc52bb | collision_attr_sleep | Inflicts the sleep status, which puts opponents to sleep. Used on moves like Jigglypuff's Sing. | Hit |
 | 0x1710166637 | collision_attr_sleep_ex | A variant on the sleep effect which pops the target up slightly. Used on moves like Hero's Snooze. | Hit |
-| 0x131b56c975 | collision_attr_slip | Inflicts the slip status, which trips the opponent. Used on several moves, namely the Banana item. | Hit |
+| 0x131b56c975 | collision_attr_slip | Inflicts the slip status, which trips the opponent. Used on Wario's Waft and the Banana item. | Hit |
 | 0x133203c0fd | collision_attr_stab | 📝 Used only on Ridley's Skewer. | Unknown | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. May also have additional effects. -->
 | 0x14604c88a3 | collision_attr_sting | Creates a horizontal piercing effect. Used on stabbing type moves like Roy's Down Tilt and Luigi's Forward Smash. | Visual |
-| 0x1d7a481588 | collision_attr_sting_bowarrow | 📝 Used exclusively on Byleth's Neutral Special (not fully charged). Uncertain how it differs from the sting attribute. | Visual | <!-- Need a general description of what it looks like. If it's similar to sting, mention how it differs. May also have additional effects. -->
+| 0x1d7a481588 | collision_attr_sting_bowarrow | 📝 Used exclusively on Byleth's Neutral Special (phase 1). Uncertain how it differs from the sting attribute. | Visual | <!-- Need a general description of what it looks like. If it's similar to sting, mention how it differs. May also have additional effects. -->
 | 0x1aa2fd0729 | collision_attr_sting_flash | 📝 Used exclusively on Sephiroth's Scintilla. Uncertain how it differs from the sting attribute. | Visual |<!-- Need a general description of what it looks like. If it's similar to sting, mention how it differs. May also have additional effects. -->
 | 0x135f399c3b | collision_attr_stop | 📝 Used exclusively on Sephiroth's Supernova and Mega Man's Crash Bomber. | Unknown | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. May also have additional effects. -->
 | 0x18c8a6895d | collision_attr_taiyo_hit | Emits a golden particle ring and lens flare effect. Used on Wii Fit Trainer's Sun Salutation. | Visual |
