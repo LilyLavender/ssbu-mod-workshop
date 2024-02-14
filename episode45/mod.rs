@@ -61,10 +61,12 @@ unsafe extern "C" fn wolf_check_special_command(fighter: &mut L2CFighterCommon) 
 // Add a section to a status script without having to translate it
 #[status_script(agent = "wolf", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe extern "C" fn wolf_special_s_start_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    // If flag is on, activate damage multiplier and turn flag off
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND) {
         AttackModule::set_power_up(fighter.module_accessor, 1.5);
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND)
     }
+    // Run original code of special_s status
     original!(fighter)
 }
 
