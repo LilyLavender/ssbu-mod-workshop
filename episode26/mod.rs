@@ -11,8 +11,8 @@ use {
 };
 use skyline::hooks::{getRegionAddress, Region};
 
-static mut INT_OFFSET : usize = 0x4ded80;
-static mut FLOAT_OFFSET : usize = 0x4dedc0;
+static INT_OFFSET : usize = 0x4e53a0;
+static FLOAT_OFFSET : usize = 0x4e53e0;
 
 #[skyline::hook(offset=INT_OFFSET)]
 pub unsafe fn int_param_accessor_hook(boma: u64, param_type: u64, param_hash: u64) -> i32 {
