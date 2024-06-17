@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_ELIGHT )]
-fn elight_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn elight_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("attack_s3s") || 
@@ -47,8 +46,7 @@ fn elight_frame(fighter: &mut L2CFighterCommon) {
     
 }
 
-#[acmd_script( agent = "elight", script = "game_attack11", category = ACMD_GAME, low_priority )]
-unsafe fn elight_game_attack11(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn elight_game_attack11(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 0.5);
     frame(agent.lua_state_agent, 3.0);
@@ -76,10 +74,8 @@ unsafe fn elight_game_attack11(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        elight_game_attack11
-    );
-    smashline::install_agent_frames!(
-        elight_frame
-    );
+    Agent::new("elight")
+        .game_acmd("game_attack11", elight_game_attack11, Default)
+        .on_line(Main, elight_frame)
+        .install();
 }

@@ -1,19 +1,6 @@
 
-// agent = The character whose script you're editing
-    // Some characters use different names, such as megaman, who uses "rockman" instead. 
-    // A full list can be found in the other files in the episode02 folder.
-
-// script = The name of the script you're editing
-    // A list of common scripts can be found in the other files in the episode02 folder.
-    // A full list of script names can be found here: 
-    // https://docs.google.com/spreadsheets/d/1q_TpWoQkr9YWgQ7fc3JpHuU9zKfCLtl80Uodcyc0NPY/edit#gid=0
-
-// category = The type of script, either ACMD_GAME, ACMD_EFFECT, ACMD_SOUND, or ACMD_EXPRESSION
-
-// low_priority is an optional argument, which just makes it so conflicting scripts will take precedence over this one
-#[acmd_script( agent = "rockman", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-// game_attackairf is the name of the function you're defining. It can be whatever you'd like, but charname_type_scriptname is a common and helpful rule to follow
-unsafe fn game_attackairf(agent: &mut L2CAgentBase) {
+// rockman_game_attackairf is the name of the function you're defining. It can be whatever you'd like, but charname_type_scriptname is a common and helpful rule to follow
+unsafe extern "C" fn rockman_game_attackairf(agent: &mut L2CAgentBase) {
 
     // The frame that all of the next actions will be processed on, in this example, 3
     frame(agent.lua_state_agent, 3.0);
@@ -57,3 +44,28 @@ unsafe fn game_attackairf(agent: &mut L2CAgentBase) {
     }
     
 }
+
+pub fn install() {
+    Agent::new("rockman")
+        .game_acmd("game_attackairf", rockman_game_attackairf, Default)
+        .install();
+}
+
+// Agent::new("rockman") = The fighter you're editing.
+    // Some characters use different names, such as megaman, who uses "rockman" instead. 
+    // A full list can be found in the other files in the episode02 folder.
+
+// .game_acmd = The type of script. 
+    // Either game_acmd, effect_acmd, sound_acmd, or expression_acmd
+
+// "game_attackairf" = The name of the script you're editing
+    // A list of common scripts can be found in the other files in the episode02 folder.
+    // A full list of script names can be found here: 
+    // https://docs.google.com/spreadsheets/d/1q_TpWoQkr9YWgQ7fc3JpHuU9zKfCLtl80Uodcyc0NPY/edit#gid=0
+
+// rockman_game_attackairf = The function name defined previously
+
+// Default = Priority
+    // Can either be Low, Default, or High. Best to keep as Default
+
+// Make sure to end each agent with .install();

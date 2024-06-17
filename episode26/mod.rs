@@ -7,7 +7,7 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 use skyline::hooks::{getRegionAddress, Region};
 

@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "wario", script = "game_attackhi3", category = ACMD_GAME, low_priority )]
-unsafe fn wario_game_attackhi3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_game_attackhi3(agent: &mut L2CAgentBase) {
     // This is for odd slots, to do just a single slot, use "== slotnum"
     if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 2 == 1 {
         
@@ -46,8 +45,7 @@ unsafe fn wario_game_attackhi3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "wario", script = "effect_attackhi3", category = ACMD_EFFECT, low_priority )]
-unsafe fn wario_effect_attackhi3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_effect_attackhi3(agent: &mut L2CAgentBase) {
     if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 2 == 1 {
         
         frame(agent.lua_state_agent, 5.0);
@@ -77,8 +75,8 @@ unsafe fn wario_effect_attackhi3(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        wario_game_attackhi3,
-        wario_effect_attackhi3
-    );
+    Agent::new("wario")
+        .game_acmd("game_attackhi3", wario_game_attackhi3, Default)
+        .effect_acmd("effect_attackhi3", wario_effect_attackhi3, Default)
+        .install();
 }

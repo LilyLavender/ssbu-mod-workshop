@@ -7,17 +7,16 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 use skyline::nn::ro::LookupSymbol;
 use skyline::hooks::{Region,getRegionAddress};
 use skyline::libc::*;
 
 static mut NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x675A20;
-const FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT : i32 = 0x200000eb;
+const FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT : i32 = 0x200000EB;
 
-#[acmd_script( agent = "ryu", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
@@ -77,8 +76,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     original!()(fighter_manager, attacker_id, defender_id, move_type, arg5, move_type_again, fighter)
 }
 
-#[fighter_frame( agent = FIGHTER_KIND_RYU )]
-fn ryu_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn ryu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         
         if MotionModule::motion_kind(fighter.module_accessor) != hash40("attack_air_f") {
@@ -114,13 +112,11 @@ pub fn install() {
             NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET = offset;
         }
     }
-    install_acmd_scripts!(
-        ryu_game_attackairf
-    );
     skyline::install_hook!(
         notify_log_event_collision_hit_replace
     );
-    smashline::install_agent_frames!(
-        ryu_frame
-    );
+    Agent::new("ryu")
+        .game_acmd("game_attackairf", ryu_game_attackairf, Default)
+        .on_line(Main, ryu_frame)
+        .install();
 }

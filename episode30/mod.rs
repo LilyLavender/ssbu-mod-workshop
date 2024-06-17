@@ -7,11 +7,11 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn ridley_specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+// Main
+unsafe extern "C" fn ridley_specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::set_int64(fighter.module_accessor, 0xa28f17495, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
     WorkModule::set_int64(fighter.module_accessor, 0xed8a31e01, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND_AIR);
     WorkModule::set_float(fighter.module_accessor, 0.25, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_LR_STICK_X);
@@ -29,13 +29,14 @@ unsafe fn ridley_specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_shift_status_main(L2CValue::Ptr(ridley_specialhi_main_loop as *const () as _))
 }
 
+// Main loop
 unsafe extern "C" fn ridley_specialhi_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.super_jump_punch_main();
     return 0.into();
 }
 
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn ridley_specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+// Pre
+unsafe extern "C" fn ridley_specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor, 
         smash::app::SituationKind(*SITUATION_KIND_NONE),
@@ -63,14 +64,13 @@ unsafe fn ridley_specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     return 0.into();
 }
 
-#[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+// End
+unsafe extern "C" fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.super_jump_punch_end(L2CValue::Ptr(L2CFighterCommon_super_jump_punch_reset_common_condition as *const () as _));
     return 0.into();
 }
 
-#[acmd_script( agent = "ridley", script = "game_specialhi", category = ACMD_GAME, low_priority )]
-unsafe fn ridley_game_specialhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_game_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -115,8 +115,7 @@ unsafe fn ridley_game_specialhi(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "ridley", script = "game_specialairhi", category = ACMD_GAME, low_priority )]
-unsafe fn ridley_game_specialairhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_game_specialairhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -161,8 +160,7 @@ unsafe fn ridley_game_specialairhi(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "ridley", script = "effect_specialhi", category = ACMD_EFFECT, low_priority )]
-unsafe fn ridley_effect_specialhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_effect_specialhi(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FLW_POS(agent, Hash40::new("plizardon_sorawotobu_flash"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
     }
@@ -191,8 +189,7 @@ unsafe fn ridley_effect_specialhi(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "ridley", script = "effect_specialairhi", category = ACMD_EFFECT, low_priority )]
-unsafe fn ridley_effect_specialairhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_effect_specialairhi(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FLW_POS(agent, Hash40::new("plizardon_sorawotobu_flash"), Hash40::new("top"), 0, -3, 0, 0, 0, 0, 1, true);
     }
@@ -218,15 +215,13 @@ unsafe fn ridley_effect_specialairhi(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        ridley_game_specialairhi,
-        ridley_effect_specialairhi,
-        ridley_game_specialhi,
-        ridley_effect_specialhi,
-    );
-    smashline::install_status_scripts!(
-        ridley_specialhi_main,
-        ridley_specialhi_pre,
-        ridley_specialhi_end,
-    );
+    Agent::new("ridley")
+        .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, ridley_specialhi_main)
+        .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, ridley_specialhi_pre)
+        .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, ridley_specialhi_end)
+        .game_acmd("game_specialairhi", ridley_game_specialairhi, Default)
+        .effect_acmd("effect_specialairhi", ridley_effect_specialairhi, Default)
+        .game_acmd("game_specialhi", ridley_game_specialhi, Default)
+        .effect_acmd("effect_specialhi", ridley_effect_specialhi, Default)
+        .install();
 }

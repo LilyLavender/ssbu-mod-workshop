@@ -7,7 +7,7 @@ use {
 		hash40
     },
     smash_script::*,
-	smashline::*
+	smashline::{*, Priority::*}
 };
 
 pub const FIGHTER_CHROM_GENERATE_ARTICLE_LIGHTBEAM :i32 = 0x1;
@@ -78,12 +78,12 @@ unsafe extern "C" fn chrom_effect_attack11(agent: &mut L2CAgentBase) {
 
 pub fn install() {
 	Agent::new("chrom")
-		.game_acmd("game_specials1", chrom_game_specials1)
-        .game_acmd("game_specialairs1", chrom_game_specials1)
-        .effect_acmd("effect_attack11", chrom_effect_attack11)
+		.game_acmd("game_specials1", chrom_game_specials1, Default)
+        .game_acmd("game_specialairs1", chrom_game_specials1, Default)
+        .effect_acmd("effect_attack11", chrom_effect_attack11, Default)
 		.install();
     Agent::new("chrom_lightbeam")
-        .game_acmd("game_regular", chrom_lightbeam_game_regular)
-        .effect_acmd("effect_regular", chrom_lightbeam_effect_regular)
+        .game_acmd("game_regular", chrom_lightbeam_game_regular, Default)
+        .effect_acmd("effect_regular", chrom_lightbeam_effect_regular, Default)
         .install();
 }

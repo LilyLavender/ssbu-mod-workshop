@@ -7,13 +7,11 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_DEDEDE )]
-fn dedede_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn dedede_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        
         let currentSize = PostureModule::scale(fighter.module_accessor);
         
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) {
@@ -26,7 +24,7 @@ fn dedede_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        dedede_frame
-    );
+    Agent::new("dedede")
+        .on_line(Main, dedede_frame)
+        .install();
 }

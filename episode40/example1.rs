@@ -7,10 +7,9 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "edge", script = "effect_attackairhi", category = ACMD_EFFECT, low_priority )]
 unsafe fn edge_effect_attackairhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
@@ -50,7 +49,7 @@ unsafe fn edge_effect_attackairhi(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        edge_effect_attackairhi,
-    );
+    Agent::new("edge")
+        .effect_acmd("effect_attackairhi", edge_effect_attackairhi, Default)
+        .install();
 }

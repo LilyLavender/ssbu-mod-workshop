@@ -7,12 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-// Multple scripts are edited at once with the bracketed section
-#[acmd_script( agent = "zelda", scripts = [ "game_appealhil", "game_appealhir" ], category = ACMD_GAME, low_priority )]
-unsafe fn zelda_game_appealhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn zelda_game_appealhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) { // A
@@ -33,7 +31,7 @@ unsafe fn zelda_game_appealhi(agent: &mut L2CAgentBase) {
         
         let xpos = ControlModule::get_stick_x(agent.module_accessor);
         let ypos = ControlModule::get_stick_y(agent.module_accessor);
-        if (xpos < 0.0 && ypos < 0.0) {
+        if xpos < 0.0 && ypos < 0.0 {
             macros::ATTACK(agent, 0, 0, Hash40::new("handr"), 0.0, 88, 5, 0, 102, 10000.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
         }
     }
@@ -44,7 +42,8 @@ unsafe fn zelda_game_appealhi(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        zelda_game_appealhi
-    );
+    Agent::new("zelda")
+        .game_acmd("game_appealhil", zelda_game_appealhi, Default)
+        .game_acmd("game_appealhir", zelda_game_appealhi, Default)
+        .install();
 }

@@ -7,19 +7,17 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "luigi_fireball", script = "game_regular", category = ACMD_GAME, low_priority )]
-unsafe fn luigi_fireball_game_regular(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn luigi_fireball_game_regular(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 40, 0, 80, 5.4, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_SPEED, false, -3, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::enable_safe_pos(agent.module_accessor);
     }
 }
 
-#[acmd_script( agent = "luigi_fireball", script = "effect_regular", category = ACMD_EFFECT, low_priority )]
-unsafe fn luigi_fireball_effect_regular(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn luigi_fireball_effect_regular(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         if get_value_float(agent.lua_state_agent, *SO_VAR_FLOAT_LR) < 0.0 {
             macros::EFFECT_FOLLOW(agent, Hash40::new("luigi_fb_bullet_l"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 0.6, true);
@@ -34,7 +32,7 @@ unsafe fn luigi_fireball_effect_regular(agent: &mut L2CAgentBase) {
     }
 }
 
-#[status_script(agent = "luigi_fireball", status = WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+// Pre
 unsafe extern "C" fn luigi_fireball_start_pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(
         weapon.module_accessor, 
@@ -51,8 +49,8 @@ unsafe extern "C" fn luigi_fireball_start_pre(weapon: &mut L2CWeaponCommon) -> L
     return 0.into();
 }
 
-#[status_script(agent = "luigi_fireball", status = WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn luigi_fireball_start_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
+// Main
+unsafe extern "C" fn luigi_fireball_start_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
     weapon.fastshift(L2CValue::Ptr(luigi_fireball_start_main_loop as *const () as _))
 }
@@ -99,12 +97,10 @@ unsafe extern "C" fn luigi_fireball_start_main_loop(weapon: &mut L2CWeaponCommon
 }
 
 pub fn install() {
-    install_status_scripts!(
-        luigi_fireball_start_pre,
-        luigi_fireball_start_main,
-    );
-    smashline::install_acmd_scripts!(
-        luigi_fireball_game_regular,
-        luigi_fireball_effect_regular,
-    );
+    Agent::new("luigi_fireball")
+        .game_acmd("game_regular", luigi_fireball_game_regular, Default)
+        .effect_acmd("effect_regular", luigi_fireball_effect_regular, Default)
+        .status(Pre, *WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, luigi_fireball_start_pre)
+        .status(Main, *WEAPON_LUIGI_FIREBALL_STATUS_KIND_START, luigi_fireball_start_main)
+        .install();
 }

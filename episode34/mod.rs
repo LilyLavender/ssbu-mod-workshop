@@ -7,18 +7,22 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "younglink", scripts = [ "game_appealhil", "game_appealhir", "game_appealsl", "game_appealsr", "game_appeallwl", "game_appeallwr" ], category = ACMD_GAME, low_priority )]
-unsafe fn younglink_game_appeal(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn younglink_game_appeal(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
     }
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        younglink_game_appeal
-    );
+    Agent::new("younglink")
+        .game_acmd("game_appealhil", younglink_game_appeal, Default)
+        .game_acmd("game_appealhir", younglink_game_appeal, Default)
+        .game_acmd("game_appealsl", younglink_game_appeal, Default)
+        .game_acmd("game_appealsr", younglink_game_appeal, Default)
+        .game_acmd("game_appeallwl", younglink_game_appeal, Default)
+        .game_acmd("game_appeallwr", younglink_game_appeal, Default)
+        .install();
 }

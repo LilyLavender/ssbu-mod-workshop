@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_LUCARIO )]
-fn lucario_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn lucario_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma1 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(0));
         let boma2 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(1));
@@ -26,7 +25,7 @@ fn lucario_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        lucario_frame
-    );
+    Agent::new("lucario")
+        .on_line(Main, lucario_frame)
+        .install();
 }

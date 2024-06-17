@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_MEWTWO )]
-fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let kinetic_motion = std::mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION));
         if DamageModule::damage(fighter.module_accessor, 0) == 0.0 {
@@ -46,7 +45,7 @@ fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        mewtwo_frame
-    );
+    Agent::new("mewtwo")
+        .on_line(Main, mewtwo_frame)
+        .install();
 }

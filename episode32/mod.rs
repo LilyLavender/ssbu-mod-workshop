@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "jack", script = "game_attackairb", category = ACMD_GAME, low_priority )]
-unsafe fn jack_game_attackairb(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn jack_game_attackairb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -58,8 +57,7 @@ unsafe fn jack_game_attackairb(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "jack", script = "effect_attackairb", category = ACMD_EFFECT, low_priority )]
-unsafe fn jack_effect_attackairb(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn jack_effect_attackairb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("tex_jack_sword1"), Hash40::new("tex_jack_sword2"), 4, Hash40::new("knife"), 0.0, 0.25, 0.15, Hash40::new("knife"), 0.0, 5.8, 0.0, true, Hash40::new("jack_knife"), Hash40::new("knife"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0 as u64, *EFFECT_AXIS_X, 0.0 as u64, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -93,8 +91,7 @@ unsafe fn jack_effect_attackairb(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "jack", script = "sound_attackairb", category = ACMD_SOUND, low_priority )]
-unsafe fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         macros::PLAY_SEQUENCE(agent, Hash40::new("seq_jack_rnd_attack_m"));
@@ -116,9 +113,9 @@ unsafe fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        jack_game_attackairb,
-        jack_effect_attackairb,
-        jack_sound_attackairb
-    );
+    Agent::new("jack")
+        .game_acmd("game_attackairb", jack_game_attackairb, Default)
+        .effect_acmd("effect_attackairb", jack_effect_attackairb, Default)
+        .sound_acmd("sound_attackairb", jack_sound_attackairb, Default)
+        .install();
 }

@@ -1,6 +1,8 @@
 # Smash Ultimate Modding Workshop
 The Smash Ultimate Mod Workshop is the series where I go over everything from getting started to editing status scripts. This repo has all of the code examples from the series, as well as some resources and written tutorials. Any questions/comments/concerns/grievances/vexes/gripes, message me on Discord @LilyLambda
 
+The videos use Smashline 1, while the repository is up-to-date for Smashline 2. The changes are very minimal and the videos still apply.
+
 [Here's](https://www.youtube.com/playlist?list=PLJ8C0Hk2ZKHvxjfFylRUIbVnDUvxLdejh) a link to the playlist
 
 ## Flowchart

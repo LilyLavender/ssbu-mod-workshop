@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_FOX )]
-fn fox_frame(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn fox_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = fighter.module_accessor;
         if StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD && 
@@ -22,7 +21,7 @@ fn fox_frame(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        fox_frame
-    );
+    Agent::new("fox")
+        .on_line(Main, fox_frame)
+        .install();
 }

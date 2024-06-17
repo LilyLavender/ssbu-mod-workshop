@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "kirby", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn kirby_game_attacklw3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_game_attacklw3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, // do not edit
@@ -55,7 +54,7 @@ unsafe fn kirby_game_attacklw3(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        kirby_game_attacklw3
-    );
+    Agent::new("kirby")
+        .game_acmd("game_attacklw3", kirby_game_attacklw3, Default)
+        .install();
 }

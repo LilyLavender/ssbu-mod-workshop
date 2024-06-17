@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_LITTLEMAC )]
-fn littlemac_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn littlemac_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let motion = MotionModule::motion_kind(fighter.module_accessor);
         let motion_frame = MotionModule::frame(fighter.module_accessor);
@@ -26,8 +25,7 @@ fn littlemac_frame(fighter: &mut L2CFighterCommon) {
     }
 }
 
-#[acmd_script( agent = "littlemac", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn littlemac_game_attackairf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn littlemac_game_attackairf(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -51,8 +49,7 @@ unsafe fn littlemac_game_attackairf(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "littlemac", script = "effect_attackairf", category = ACMD_EFFECT, low_priority )]
-unsafe fn littlemac_effect_attackairf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn littlemac_effect_attackairf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
         // Chrom trail replaced with killing edge trail
@@ -65,11 +62,9 @@ unsafe fn littlemac_effect_attackairf(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        littlemac_game_attackairf,
-        littlemac_effect_attackairf,
-    );
-    smashline::install_agent_frames!(
-        littlemac_frame,
-    );
+    Agent::new("littlemac")
+        .on_line(Main, littlemac_frame)
+        .game_acmd("game_attackairf", littlemac_game_attackairf, Default)
+        .effect_acmd("effect_attackairf", littlemac_effect_attackairf, Default)
+        .install();
 }

@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame_callback]
-pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn global_fighter_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         // Return player 2 to 0% if above 80%
         let boma2 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(1));
@@ -22,7 +21,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-        global_fighter_frame
-    );
+    Agent::new("fighter")
+        .on_line(Main, global_fighter_frame)
+        .install();
 }

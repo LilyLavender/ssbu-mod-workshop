@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame_callback]
-pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = fighter.module_accessor;
         // Param declarations
@@ -47,7 +46,7 @@ unsafe extern "C" fn impactRun(fighter: &mut L2CFighterCommon, status_kind: i32,
 }
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-        global_fighter_frame
-    );
+    Agent::new("fighter")
+        .on_line(Main, global_fighter_frame)
+        .install();
 }

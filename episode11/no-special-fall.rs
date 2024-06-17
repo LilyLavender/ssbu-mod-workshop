@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_KAMUI )]
-fn kamui_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kamui_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         // No special fall
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("fall_special") {
@@ -22,7 +21,7 @@ fn kamui_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        kamui_frame
-    );
+    Agent::new("kamui")
+        .on_line(Main, kamui_frame)
+        .install();
 }

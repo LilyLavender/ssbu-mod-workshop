@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "pikachu", script = "game_attack11_libre", category = ACMD_GAME, low_priority )]
-unsafe fn pikachu_game_attack11(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_game_attack11(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     macros::FT_MOTION_RATE(agent, 0.8);
     frame(agent.lua_state_agent, 8.0);
@@ -28,8 +27,7 @@ unsafe fn pikachu_game_attack11(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, 0.9);
 }
 
-#[acmd_script( agent = "pikachu", script = "game_attacks3_libre", category = ACMD_GAME, low_priority )]
-unsafe fn pikachu_game_attacks3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_game_attacks3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("hip"), 13.0, 22, 82, 0, 31, 4.8, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_HEAVY, *ATTACK_REGION_KICK);
@@ -42,8 +40,7 @@ unsafe fn pikachu_game_attacks3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "game_attackhi3_libre", category = ACMD_GAME, low_priority )]
-unsafe fn pikachu_game_attackhi3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_game_attackhi3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 0.0, 180, 100, 22, 0, 10.0, 0.0, 5.0, 30.0, None, None, None, 0.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 6, false, false, true, true, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_FIGHTER, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
@@ -73,8 +70,7 @@ unsafe fn pikachu_game_attackhi3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "game_attacklw3_libre", category = ACMD_GAME, low_priority )]
-unsafe fn pikachu_game_attacklw3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_game_attacklw3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("legr"), 14.0, 60, 94, 0, 30, 3.0, 0.0, 0.0, 3.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.35, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -87,8 +83,7 @@ unsafe fn pikachu_game_attacklw3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "effect_attack11_libre", category = ACMD_EFFECT, low_priority )]
-unsafe fn pikachu_effect_attack11(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_effect_attack11(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         macros::FOOT_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -100,8 +95,7 @@ unsafe fn pikachu_effect_attack11(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "effect_attacks3_libre", category = ACMD_EFFECT, low_priority )]
-unsafe fn pikachu_effect_attacks3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_effect_attacks3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 11.8, -10, 0, 0, 0, 1.6, 0, 0, 0, 0, 0, 0, true);
@@ -113,8 +107,7 @@ unsafe fn pikachu_effect_attacks3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "effect_attackhi3_libre", category = ACMD_EFFECT, low_priority )]
-unsafe fn pikachu_effect_attackhi3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_effect_attackhi3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     for _ in 0..5 {
         if macros::is_excute(agent) {
@@ -150,8 +143,7 @@ unsafe fn pikachu_effect_attackhi3(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "pikachu", script = "effect_attacklw3_libre", category = ACMD_EFFECT, low_priority )]
-unsafe fn pikachu_effect_attacklw3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pikachu_effect_attacklw3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), -1, 9.5, 0, 10, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, true);
@@ -164,14 +156,14 @@ unsafe fn pikachu_effect_attacklw3(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        pikachu_game_attack11,
-        pikachu_effect_attack11,
-        pikachu_game_attacks3,
-        pikachu_effect_attacks3,
-        pikachu_game_attackhi3,
-        pikachu_effect_attackhi3,
-        pikachu_game_attacklw3,
-        pikachu_effect_attacklw3,
-    );
+    Agent::new("pikachu")
+        .game_acmd("game_attack11_libre", pikachu_game_attack11, Default)
+        .game_acmd("game_attacks3_libre", pikachu_game_attacks3, Default)
+        .game_acmd("game_attackhi3_libre", pikachu_game_attackhi3, Default)
+        .game_acmd("game_attacklw3_libre", pikachu_game_attacklw3, Default)
+        .effect_acmd("effect_attack11_libre", pikachu_effect_attack11, Default)
+        .effect_acmd("effect_attacks3_libre", pikachu_effect_attacks3, Default)
+        .effect_acmd("effect_attackhi3_libre", pikachu_effect_attackhi3, Default)
+        .effect_acmd("effect_attacklw3_libre", pikachu_effect_attacklw3, Default)
+        .install();
 }

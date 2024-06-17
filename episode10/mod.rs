@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "krool", script = "game_attackhi4", category = ACMD_GAME, low_priority )]
-unsafe fn krool_game_attackhi4(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn krool_game_attackhi4(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -61,8 +60,7 @@ unsafe fn krool_game_attackhi4(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "krool", scripts = [ "game_specialhi", "game_specialairhi" ], category = ACMD_GAME, low_priority )]
-unsafe fn krool_game_specialhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn krool_game_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 60.0);
     if macros::is_excute(agent) {
         if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
@@ -80,8 +78,9 @@ unsafe fn krool_game_specialhi(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        krool_game_attackhi4,
-        krool_game_specialhi
-    );
+    Agent::new("krool")
+        .game_acmd("game_attackhi4", krool_game_attackhi4, Default)
+        .game_acmd("game_specialhi", krool_game_specialhi, Default)
+        .game_acmd("game_specialairhi", krool_game_specialhi, Default)
+        .install();
 }

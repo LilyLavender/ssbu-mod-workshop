@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "ganon", script = "game_attack11", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_game_attack11(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_game_attack11(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     macros::FT_MOTION_RATE(agent, 0.8);
     frame(agent.lua_state_agent, 8.0);
@@ -45,7 +44,7 @@ unsafe fn ganon_game_attack11(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        ganon_game_attack11
-    );
+    Agent::new("ganon")
+        .game_acmd("game_attack11", ganon_game_attack11, Default)
+        .install();
 }

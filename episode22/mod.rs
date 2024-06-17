@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "master", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn master_game_attackairn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn master_game_attackairn(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         // Changed bow to sword
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, false, -1);
@@ -52,8 +51,7 @@ unsafe fn master_game_attackairn(agent: &mut L2CAgentBase) {
 }
 
 // Note that this is ONLY down-angled fsmash
-#[acmd_script( agent = "master", script = "game_attacks4lw", category = ACMD_GAME, low_priority )]
-unsafe fn master_game_attacks4lw(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn master_game_attacks4lw(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, -1);
     }
@@ -85,8 +83,8 @@ unsafe fn master_game_attacks4lw(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        master_game_attackairn,
-        master_game_attacks4lw
-    );
+    Agent::new("master")
+        .game_acmd("game_attackairn", master_game_attackairn, Default)
+        .game_acmd("game_attacks4lw", master_game_attacks4lw, Default)
+        .install();
 }

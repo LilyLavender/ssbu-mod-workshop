@@ -7,15 +7,15 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
 pub const SUB_STATUS:			i32 = 0x15;
 pub const SITUATION_KIND:		i32 = 0x16;
 pub const PREV_SITUATION_KIND:	i32 = 0x17;
 
-#[status_script(agent = "metaknight", status = FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn metaknight_specialnspin_main(fighter: &mut L2CFighterCommon) -> L2CValue {	
+// Main
+unsafe extern "C" fn metaknight_specialnspin_main(fighter: &mut L2CFighterCommon) -> L2CValue {	
     // In vanilla, this is set to the button_unable_frame param, which is 60
     WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_UNABLE_COUNTER);
     // Motion-Related
@@ -128,7 +128,7 @@ unsafe extern "C" fn FUN_710001ca30(fighter: &mut L2CFighterCommon, param_3: L2C
 }
 
 pub fn install() {
-    install_status_scripts!(
-        metaknight_specialnspin_main,
-    );
+    Agent::new("metaknight")
+        .status(Main, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN, metaknight_specialnspin_main)
+        .install();
 }

@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "captain", script = "game_specialairsstart", category = ACMD_GAME, low_priority )]
-unsafe fn captain_game_specialairsstart(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_game_specialairsstart(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         JostleModule::set_status(agent.module_accessor, false);
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_NONE);
@@ -41,8 +40,7 @@ unsafe fn captain_game_specialairsstart(agent: &mut L2CAgentBase) {
     }
 }
 
-#[fighter_frame( agent = FIGHTER_KIND_CAPTAIN )]
-fn captain_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn captain_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) || 
@@ -62,10 +60,8 @@ fn captain_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        captain_game_specialairsstart
-    );
-    smashline::install_agent_frames!(
-        captain_frame
-    );
+    Agent::new("captain")
+        .game_acmd("game_specialairsstart", captain_game_specialairsstart, Default)
+        .on_line(Main, captain_frame)
+        .install();
 }

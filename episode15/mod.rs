@@ -7,13 +7,12 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
 static mut gaoMode: [i32; 8] = [0; 8];
 
-#[fighter_frame( agent = FIGHTER_KIND_GAOGAEN )]
-fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         
@@ -50,7 +49,7 @@ fn gaogaen_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        gaogaen_frame,
-    );
+    Agent::new("gaogaen")
+        .on_line(Main, gaogaen_frame)
+        .install();
 }

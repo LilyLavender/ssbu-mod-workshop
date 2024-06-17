@@ -7,26 +7,21 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-pub const KIND:                     i32 = 0x2;
 pub const CMD_CAT4:                 i32 = 0x23;
 pub const CHECK_SPECIAL_COMMAND:    i32 = 0x3C;
 
-const FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND : i32 = 0x200000f0;
+const FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND : i32 = 0x200000E2;
 
 // Agent init - Runs once when a fighter starts existing
-#[fighter_init]
-fn agent_init(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn agent_init(fighter: &mut L2CFighterCommon) {
     unsafe {
-        let fighter_kind = fighter.global_table[KIND].get_i32();
-        if fighter_kind == *FIGHTER_KIND_WOLF {
-            // Turning this flag on allows a character to do command inputs
-            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAN_SPECIAL_COMMAND);
-            // Assigning our own defined function to the correct spot in the global_table
-            fighter.global_table[CHECK_SPECIAL_COMMAND].assign(&L2CValue::Ptr(wolf_check_special_command as *const () as _));
-        }
+        // Turning this flag on allows a character to do command inputs
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAN_SPECIAL_COMMAND);
+        // Assigning our own defined function to the correct spot in the global_table
+        fighter.global_table[CHECK_SPECIAL_COMMAND].assign(&L2CValue::Ptr(wolf_check_special_command as *const () as _));
     }
 }
 
@@ -59,22 +54,19 @@ unsafe extern "C" fn wolf_check_special_command(fighter: &mut L2CFighterCommon) 
 }
 
 // Add a section to a status script without having to translate it
-#[status_script(agent = "wolf", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe extern "C" fn wolf_special_s_start_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     // If flag is on, activate damage multiplier and turn flag off
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND) {
         AttackModule::set_power_up(fighter.module_accessor, 1.5);
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_WOLF_INSTANCE_WORK_ID_FLAG_SPECIAL_S_COMMAND)
     }
-    // Run original code of special_s status
-    original!(fighter)
+    // Run original code of wolf special_s status
+    original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter)
 }
 
 pub fn install() {
-    install_agent_init_callback!(
-        agent_init
-    );
-    install_status_scripts!(
-        wolf_special_s_start_main,
-    );
+    Agent::new("wolf")
+        .on_start(agent_init)
+        .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_S, wolf_special_s_start_main)
+        .install();
 }

@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "roy", script = "effect_attack11", category = ACMD_EFFECT, low_priority )]
-unsafe fn roy_effect_attack11(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_effect_attack11(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::FOOT_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         // Added fx
@@ -32,8 +31,7 @@ unsafe fn roy_effect_attack11(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "roy", script = "effect_attackairn", category = ACMD_EFFECT, low_priority )]
-unsafe fn roy_effect_attackairn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_effect_attackairn(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         // Added bg
@@ -67,8 +65,8 @@ unsafe fn roy_effect_attackairn(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        roy_effect_attack11,
-        roy_effect_attackairn
-    );
+    Agent::new("roy")
+        .effect_acmd("effect_attack11", roy_effect_attack11, Default)
+        .effect_acmd("effect_attackairn", roy_effect_attackairn, Default)
+        .install();
 }

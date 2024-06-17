@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "lucina", script = "expression_attacklw3", category = ACMD_EXPRESSION, low_priority )]
-unsafe fn lucina_expression_attacklw3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_expression_attacklw3(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         AttackModule::set_attack_reference_joint_id(agent.module_accessor, Hash40::new("sword1"), AttackDirectionAxis(*ATTACK_DIRECTION_Z), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_X));
         slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 6);
@@ -35,7 +34,7 @@ unsafe fn lucina_expression_attacklw3(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        lucina_expression_attacklw3
-    );
+    Agent::new("lucina")
+        .expression_acmd("expression_attacklw3", lucina_expression_attacklw3, Default)
+        .install();
 }

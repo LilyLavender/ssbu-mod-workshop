@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "link", scripts = [ "game_appealhil", "game_appealhir" ], category = ACMD_GAME, low_priority )]
-unsafe fn link_game_appealhi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn link_game_appealhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 20.0);
     if macros::is_excute(agent) {
         if ControlModule::check_button_on(agent.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) { // Dpad up
@@ -36,8 +35,7 @@ static mut linkPosX: [f32; 8] = [0.0; 8];
 static mut linkPosY: [f32; 8] = [0.0; 8];
 static mut linkPosZ: [f32; 8] = [0.0; 8];
 
-#[acmd_script( agent = "link", script = "game_appealsr", category = ACMD_GAME, low_priority )]
-unsafe fn link_game_appealsr(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn link_game_appealsr(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
@@ -62,8 +60,7 @@ unsafe fn link_game_appealsr(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "link", script = "game_appealsl", category = ACMD_GAME, low_priority )]
-unsafe fn link_game_appealsl(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn link_game_appealsl(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if macros::is_excute(agent) {
         linkPosX[entry_id] = PostureModule::pos_x(agent.module_accessor);
@@ -74,9 +71,10 @@ unsafe fn link_game_appealsl(agent: &mut L2CAgentBase) {
 
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        link_game_appealhi,
-        link_game_appealsr,
-        link_game_appealsl
-    );
+    Agent::new("link")
+        .game_acmd("game_appealhil", link_game_appealhi, Default)
+        .game_acmd("game_appealhir", link_game_appealhi, Default)
+        .game_acmd("game_appealsr", link_game_appealsr, Default)
+        .game_acmd("game_appealsl", link_game_appealsl, Default)
+        .install();
 }

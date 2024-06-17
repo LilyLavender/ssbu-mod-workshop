@@ -7,13 +7,13 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
 pub const SITUATION_KIND:   i32 = 0x16;
 
-#[status_script(agent = "szerosuit", status = FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_FLIP, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn szerosuit_speciallwflip_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+// Main
+unsafe extern "C" fn szerosuit_speciallwflip_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_flip"), 0.0, 1.0, false, 0.0, false, false);
     fighter.set_situation(SITUATION_KIND_AIR.into());
     GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
@@ -28,6 +28,7 @@ unsafe fn szerosuit_speciallwflip_main(fighter: &mut L2CFighterCommon) -> L2CVal
     fighter.sub_shift_status_main(L2CValue::Ptr(szerosuit_speciallwflip_main_loop as *const () as _))
 }
 
+// Main loop
 unsafe extern "C" fn szerosuit_speciallwflip_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if !CancelModule::is_enable_cancel(fighter.module_accessor) {
         if !MotionModule::is_end(fighter.module_accessor) {
@@ -59,7 +60,7 @@ unsafe extern "C" fn szerosuit_speciallwflip_main_loop(fighter: &mut L2CFighterC
 }
 
 pub fn install() {
-    install_status_scripts!(
-        szerosuit_speciallwflip_main,
-    );
+    Agent::new("szerosuit")
+        .status(Main, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_FLIP, szerosuit_speciallwflip_main)
+        .install();
 }

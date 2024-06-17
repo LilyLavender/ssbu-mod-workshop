@@ -7,15 +7,14 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
 // Use these for effects
 //pub static mut TIME_SLOW_EFFECT_VECTOR: smash::phx::Vector3f = smash::phx::Vector3f {x:-3.0,y:3.0,z:0.0};
 //pub const TIME_SLOW_EFFECT_HASH: u64 = smash::hash40("sys_sp_flash");
 
-#[fighter_frame( agent = FIGHTER_KIND_BAYONETTA )]
-fn bayonetta_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn bayonetta_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         // get bomas
         let boma1 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(0));
@@ -41,7 +40,7 @@ fn bayonetta_frame(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        bayonetta_frame
-    );
+    Agent::new("bayonetta")
+        .on_line(Main, bayonetta_frame)
+        .install();
 }

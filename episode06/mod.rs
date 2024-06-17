@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[acmd_script( agent = "dolly", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn dolly_game_attackairf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn dolly_game_attackairf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -36,8 +35,7 @@ unsafe fn dolly_game_attackairf(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "dolly", script = "effect_attackairf", category = ACMD_EFFECT, low_priority )]
-unsafe fn dolly_effect_attackairf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn dolly_effect_attackairf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 10, 8, -20, 0, 0, 0.7, true);
@@ -50,8 +48,8 @@ unsafe fn dolly_effect_attackairf(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dolly_game_attackairf,
-        dolly_effect_attackairf
-    );
+    Agent::new("dolly")
+        .game_acmd("game_attackairf", dolly_game_attackairf, Default)
+        .effect_acmd("effect_attackairf", dolly_effect_attackairf, Default)
+        .install();
 }

@@ -7,11 +7,10 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
-#[fighter_frame( agent = FIGHTER_KIND_PEACH )]
-fn peach_frame(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn peach_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let status_kind = fighter.global_table[0xb].get_i32();
         let status_frame = fighter.global_table[0xe].get_i32();
@@ -25,7 +24,7 @@ fn peach_frame(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        peach_frame
-    );
+    Agent::new("peach")
+        .on_line(Main, peach_frame)
+        .install();
 }

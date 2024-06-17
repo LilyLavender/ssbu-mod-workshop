@@ -7,7 +7,7 @@ use {
         hash40
     },
     smash_script::*,
-    smashline::*
+    smashline::{*, Priority::*}
 };
 
 #[skyline::hook(replace = sv_animcmd::AFTER_IMAGE4_ON_arg29)]
