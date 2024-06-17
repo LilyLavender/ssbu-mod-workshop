@@ -263,8 +263,6 @@ graph TD;
 - Cloning articles
 - Transplanting effects
 - Using param-xml to edit vl.prc
-### 47. Setting Up Rust Analyzer
-- WIP
 
 [link2]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode02
 [link3]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode03
