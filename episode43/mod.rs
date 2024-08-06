@@ -94,13 +94,13 @@ unsafe extern "C" fn FUN_710001ca30(fighter: &mut L2CFighterCommon, param_3: L2C
             
             let se_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE_COUNTER);
             let se = match se_counter {
-                0 => { if motion_kind == hash40("special_n_spin_c3") { 0x1896dcd23e } else { hash40("se_metaknight_swish07") } },
-                1 => { if motion_kind == hash40("special_n_spin_c3") { 0x187603a50d } else { hash40("se_metaknight_swish09") } },
-                2 => { if motion_kind == hash40("special_n_spin_c3") { 0x188ed7a452 } else { hash40("se_metaknight_swish11") } },
-                3 => { if motion_kind == hash40("special_n_spin_c3") { 0x188ed7a452 } else { hash40("se_metaknight_swish11") } },
+                0 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish07_c3") } else { hash40("se_metaknight_swish07") } },
+                1 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish09_c3") } else { hash40("se_metaknight_swish09") } },
+                2 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish11_c3") } else { hash40("se_metaknight_swish11") } },
+                3 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish11_c3") } else { hash40("se_metaknight_swish11") } },
                 4 => hash40("se_metaknight_swish10"),
-                5 => { if motion_kind == hash40("special_n_spin_c3") { 0x187603a50d } else { hash40("se_metaknight_swish09") } },
-                6 => { if motion_kind == hash40("special_n_spin_c3") { 0x1896dcd23e } else { hash40("se_metaknight_swish07") } },
+                5 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish09_c3") } else { hash40("se_metaknight_swish09") } },
+                6 => { if motion_kind == hash40("special_n_spin_c3") { hash40("se_metaknight_swish07_c3") } else { hash40("se_metaknight_swish07") } },
                 7 => hash40("se_metaknight_swish06"),
                 8 => hash40("se_metaknight_swish06"),
                 9 => hash40("se_metaknight_swish05"),
