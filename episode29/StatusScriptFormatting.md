@@ -7,9 +7,12 @@ Replace the text in the left column with the corresponding in the "Replace with"
 | `double space` | `\t` | In VSCode, make sure to activate regex |
 | `this->moduleAccessor` | `fighter.module_accessor` | Doesn't work in FUN_ functions |
 | `__` | `::` | Note that that's two underscores |
+| `,_` | `,` | Removes the underscore before consts. Occasionally misses a few |
 | `_impl` |
 | `app::lua_bind::` |
 | `(float)` |
+| `(int)` |
+| `(bool)` |
 
 Remove any full lines with a tilde (`~`) in it.
 
