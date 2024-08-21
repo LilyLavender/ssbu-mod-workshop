@@ -31,7 +31,7 @@ graph TD;
 ```
 
 ## List of episodes and what's covered in them: 
-### 1. Getting Started
+### 1. [Getting Started][link1]
 - Setting up a workspace to start code modding
 ### 2. [Basic File Structure][link2]
 - How hitbox scripts are composed
@@ -266,6 +266,7 @@ graph TD;
 - Transplanting effects
 - Using param-xml to edit vl.prc
 
+[link1]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode01
 [link2]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode02
 [link3]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode03
 [link4]: https://github.com/LilyLavender/ssbu-mod-workshop/tree/main/episode04
