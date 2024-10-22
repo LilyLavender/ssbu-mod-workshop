@@ -13,7 +13,7 @@ use skyline::nn::ro::LookupSymbol;
 use skyline::hooks::{Region,getRegionAddress};
 use skyline::libc::*;
 
-static mut NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x675A20;
+static mut NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x67a7b0;
 const FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT : i32 = 0x200000EB;
 
 unsafe extern "C" fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
