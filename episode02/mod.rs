@@ -51,15 +51,17 @@ pub fn install() {
         .install();
 }
 
+// pub fn install() = The install section. This is where you install scripts on agents
+
 // Agent::new("rockman") = The fighter you're editing.
     // Some characters use different names, such as megaman, who uses "rockman" instead. 
-    // A full list can be found in the other files in the episode02 folder.
+    // A full list can be found at episode02/FighterCodeNames.md
 
 // .game_acmd = The type of script. 
     // Either game_acmd, effect_acmd, sound_acmd, or expression_acmd
 
 // "game_attackairf" = The name of the script you're editing
-    // A list of common scripts can be found in the other files in the episode02 folder.
+    // A list of common scripts can be found at episode02/CommonAttackNames.md
     // A full list of script names can be found here: 
     // https://docs.google.com/spreadsheets/d/1q_TpWoQkr9YWgQ7fc3JpHuU9zKfCLtl80Uodcyc0NPY/edit#gid=0
 

@@ -10,7 +10,7 @@ use {
     smashline::{*, Priority::*}
 };
 
-// Allows for variable to be tracked for every player seperately
+// Allows for variable to be tracked seperately for each player
 static mut paluPosX: [f32; 8] = [0.0; 8];
 static mut paluPosY: [f32; 8] = [0.0; 8];
 static mut paluPosZ: [f32; 8] = [0.0; 8];

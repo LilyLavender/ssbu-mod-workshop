@@ -31,7 +31,7 @@ unsafe extern "C" fn wolf_check_special_command(fighter: &mut L2CFighterCommon) 
     
     // Side B
     // If player did a qcf input
-    // A full list of inputs can be found in the other file in the episode45 folder.
+    // A full list of inputs can be found at episode45/CommandInputList.md
     if !ret && cat4 & *FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_N_COMMAND != 0
     // If fighter is allowed to transition into side b (ie, not in hitstun, not doing another attack)
     && WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S_COMMAND) {

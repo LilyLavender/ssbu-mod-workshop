@@ -14,7 +14,7 @@ game_ThrowLioleusboss = function ()
     return 
 end
 
--- THIS FUNCTION IS EDITED
+-- Only edited function
 game_Born = function ()
     if sv_animcmd.is_excute() then
         sv_animcmd.IT_SET_PARENT_RUMBLE(72656470004, 0)

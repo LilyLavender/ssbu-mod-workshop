@@ -79,7 +79,7 @@ unsafe extern "C" fn jack_effect_attackairb(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("jack_knife_front"), Hash40::new("knife"), 0, 0, 0, 0, 180, 0, 1, true);
     }
-    // Added frame 8
+    // Added effect on frame 8
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 18.0, -18.0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
@@ -105,7 +105,7 @@ unsafe extern "C" fn jack_sound_attackairb(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_jack_attackair_b01"));
     }
-    // Added frame 8
+    // Added sound effect on frame 8
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_bomb_l"));

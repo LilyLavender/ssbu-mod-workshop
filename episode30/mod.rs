@@ -70,6 +70,7 @@ unsafe extern "C" fn ridley_specialhi_end(fighter: &mut L2CFighterCommon) -> L2C
     return 0.into();
 }
 
+// ACMD
 unsafe extern "C" fn ridley_game_specialhi(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {

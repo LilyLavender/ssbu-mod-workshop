@@ -13,8 +13,8 @@ use {
 unsafe extern "C" fn fox_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = fighter.module_accessor;
-        if StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD && 
-        ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
+        if StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD 
+        && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
             fighter.change_status(FIGHTER_STATUS_KIND_JUMP.into(), false.into());
         }
     }

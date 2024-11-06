@@ -38,7 +38,7 @@ unsafe extern "C" fn purin_game_attacklw3(agent: &mut L2CAgentBase) {
         } else {
             DamageModule::add_damage(agent.module_accessor, -1.0 * DamageModule::damage(agent.module_accessor, 0), 0);
         }*/
-        // Use this method instead
+        // Use heal instead. It accounts for negative percents
         DamageModule::heal(agent.module_accessor, -5.0, 0);
         macros::ATTACK(agent, 0, 0, Hash40::new("footl"), 10.0, 20, 68, 0, 50, 3.0, 0.0, -8.0, -1.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.35, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
         macros::ATTACK(agent, 1, 0, Hash40::new("footl"), 10.0, 20, 68, 0, 50, 3.0, 0.0, -4.0, -1.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.35, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);

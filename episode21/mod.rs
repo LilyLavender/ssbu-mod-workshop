@@ -16,21 +16,21 @@ use {
 
 unsafe extern "C" fn bayonetta_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        // get bomas
+        // Get bomas
         let boma1 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(0));
         let boma2 = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(1));
         
-        // get positions
+        // Get positions
         let b1x = PostureModule::pos_x(boma1);
         let b1y = PostureModule::pos_y(boma1);
         let b2x = PostureModule::pos_x(boma2);
         let b2y = PostureModule::pos_y(boma2);
         
-        // distance formula
+        // Distance formula
         let dSquared: f32 = (b1x - b2x) * (b1x - b2x) + (b1y - b2y) * (b1y - b2y);
         let d = dSquared.sqrt();
         
-        // if players are close, slow opponent
+        // If players are close, slow opponent
         if d < 50.0 {
             macros::SLOW_OPPONENT(fighter, 3.0, 1.0); // Strength, frames
             //EffectModule::req_on_joint(fighter.module_accessor, smash::phx::Hash40::new_raw(TIME_SLOW_EFFECT_HASH), smash::phx::Hash40::new("head"), &TIME_SLOW_EFFECT_VECTOR, &TIME_SLOW_EFFECT_VECTOR, 1.0, &TIME_SLOW_EFFECT_VECTOR, &TIME_SLOW_EFFECT_VECTOR, false, 0, 0, 0);

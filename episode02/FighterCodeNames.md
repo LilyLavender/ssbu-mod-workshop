@@ -1,5 +1,5 @@
 # Fighter Code Names
-### Characters not listed simply use their name, so Mario is mario, duck hunt is duckhunt, etc.
+### Characters not listed simply use their name, so Mario is mario, Duck Hunt is duckhunt, etc.
 
 - Donkey Kong - [ donkey ]
 - Dark Samus - [ samusd ]

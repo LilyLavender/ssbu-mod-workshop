@@ -88,10 +88,10 @@ unsafe extern "C" fn luigi_fireball_start_main_loop(weapon: &mut L2CWeaponCommon
     }
     
     // Set speed
-    weapon.agent.clear_lua_stack();
-    weapon.agent.push_lua_stack(&mut L2CValue::new_int(*WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL as u64));
-    weapon.agent.push_lua_stack(&mut L2CValue::new_num(speed_x));
-    weapon.agent.push_lua_stack(&mut L2CValue::new_num(speed_y));
+    weapon.clear_lua_stack();
+    weapon.push_lua_stack(&mut L2CValue::new_int(*WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL as u64));
+    weapon.push_lua_stack(&mut L2CValue::new_num(speed_x));
+    weapon.push_lua_stack(&mut L2CValue::new_num(speed_y));
     sv_kinetic_energy::set_speed(weapon.lua_state_agent);
     return 0.into();
 }

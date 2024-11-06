@@ -14,8 +14,8 @@ unsafe extern "C" fn littlemac_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let motion = MotionModule::motion_kind(fighter.module_accessor);
         let motion_frame = MotionModule::frame(fighter.module_accessor);
-        if motion == smash::hash40("attack_air_f") && // If current animation is "attack_air_f"
-        motion_frame >= 2.0 && motion_frame <= 18.0 { // If between frames 2 and 18 inclusive
+        if motion == smash::hash40("attack_air_f") // If current animation is "attack_air_f"
+        && motion_frame >= 2.0 && motion_frame <= 18.0 { // AND if between frames 2 and 18 inclusive
             // Show sword
             ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("chrom_sword"), true);
         } else {

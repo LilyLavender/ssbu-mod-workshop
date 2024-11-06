@@ -1,4 +1,4 @@
-## Every Link Shown Off in Episode 4
+## Episode 4 Links
 ##### See also: [Episode 31's Links](https://github.com/LilyLavender/ssbu-mod-workshop/blob/main/episode31/Links.md)
 
 1) [Wuboy's Script Dump](https://github.com/WuBoytH/SSBU-Dumped-Scripts/tree/main/smashline)

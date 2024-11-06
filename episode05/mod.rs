@@ -13,7 +13,7 @@ use {
 unsafe extern "C" fn roy_effect_attack11(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::FOOT_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-        // Added fx
+        // Added effects
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 0, -1, 0, 0, 0, 0.5, true);
     }
     frame(agent.lua_state_agent, 3.0);
@@ -34,7 +34,7 @@ unsafe extern "C" fn roy_effect_attack11(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn roy_effect_attackairn(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
-        // Added bg
+        // Added background
         EffectModule::req_screen(agent.module_accessor, Hash40::new("bg_roy_final"), false, false, false);
     }
     frame(agent.lua_state_agent, 5.0);

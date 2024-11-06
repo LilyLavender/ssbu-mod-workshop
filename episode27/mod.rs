@@ -60,15 +60,15 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let defender_boma = sv_battle_object::module_accessor(defender_id);
     let attacker_kind = sv_battle_object::kind(attacker_id);
     let defender_kind = sv_battle_object::kind(defender_id);
-    // if search_hit flag is on
+    // If search_hit flag is on
     if WorkModule::is_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT) {
-        // add velocity
+        // Add velocity
         KineticModule::add_speed(attacker_boma, &Vector3f{ x: -3.0, y: 3.0, z: 0.0 });
-        // disable flag
+        // Disable flag
         WorkModule::off_flag(attacker_boma, FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_SEARCH_HIT);
-        // if thing being hit is a fighter
+        // If thing being hit is a fighter
         if utility::get_category(&mut *defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
-            // give fighter being hit sticky bomb
+            // Give fighter being hit sticky bomb
             ItemModule::have_item(defender_boma, smash::app::ItemKind(*ITEM_KIND_CHEWING), 0, 0, false, false);
         }
     }
