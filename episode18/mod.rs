@@ -18,9 +18,9 @@ unsafe extern "C" fn captain_game_specialairsstart(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 19.0);
     if macros::is_excute(agent) {
         // Get left stick y position
-        let yCtrl = ControlModule::get_stick_y(agent.module_accessor);
+        let stick_y = ControlModule::get_stick_y(agent.module_accessor);
         // Add speed based on left stick pos
-        KineticModule::add_speed(agent.module_accessor, &Vector3f{ x: 0.0, y: yCtrl * 3.0, z: 0.0 });
+        KineticModule::add_speed(agent.module_accessor, &Vector3f{ x: 0.0, y: stick_y * 3.0, z: 0.0 });
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BACK);
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 0.0, 361, 0, 0, 0, 4.1, 0.0, 12.0, 11.0, Some(0.0), Some(3.0), Some(11.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_search"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_CAPTAIN_STATUS_WORK_ID_FLAG_FALCON_KNUCKLE_HIT_CHECK_ONOFF);
