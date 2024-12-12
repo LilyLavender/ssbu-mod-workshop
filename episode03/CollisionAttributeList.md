@@ -1,7 +1,7 @@
 ## List of Every Collision Attribute and Usage
-List by LilyLambda, PhazoGanon, & zrksyd.  
-An easier-to-copy-paste list can be found [here](https://github.com/ultimate-research/param-labels/blob/master/ParamLabels.csv).  
-Collision Attributes with "📝" require more testing. If anyone wants to help, there's comments in this doc that will have general and per-move instructions.
+- Collision Attributes with "📝" require more testing. If anyone wants to help, there's comments in this doc that will have general and per-move instructions.
+- An easier-to-copy-paste list can be found [here](https://github.com/ultimate-research/param-labels/blob/master/ParamLabels.csv).
+> List by LilyLambda, PhazoGanon, & zrksyd.
 
 | Hash | Text | Description | Type | 
 | --- | --- | --- | --- |
