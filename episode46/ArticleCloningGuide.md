@@ -3,7 +3,7 @@
 ### Disclaimers:
 - Some articles cannot currently be cloned
 - Some characters cannot get new articles
-- See [this site](https://github.com/CSharpM7/ArticleCloningInfo) for a list of everything we know about article cloning so far
+- See [this spreadsheet]([https://github.com/CSharpM7/ArticleCloningInfo](https://docs.google.com/spreadsheets/d/16SEU3MibrzTJHTjxJb7c5e7JzGgrfWY_c_hqNJtGvNY)) for a list of all articles/characters that have been confirmed to be cloneable/can get new articles
 
 ### Steps: 
 ___
