@@ -55,7 +55,7 @@ unsafe extern "C" fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
 }
 
 #[skyline::hook(offset = NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET)]
-pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash::app::FighterManager, attacker_id: u32, defender_id: u32, move_type: f32, arg5: i32, move_type_again: bool, fighter: &mut L2CAgentBase) -> u64 {
+pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash::app::FighterManager, attacker_id: u32, defender_id: u32, damage: f32, attack_kind: i32, arg6: bool) -> u64 {
     let attacker_boma = sv_battle_object::module_accessor(attacker_id);
     let defender_boma = sv_battle_object::module_accessor(defender_id);
     let attacker_kind = sv_battle_object::kind(attacker_id);
@@ -73,8 +73,15 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
         }
     }
     
-    original!()(fighter_manager, attacker_id, defender_id, move_type, arg5, move_type_again, fighter)
+    original!()(fighter_manager, attacker_id, defender_id, damage, attack_kind, arg6)
 }
+/*
+    attacker_id:    object_id of attacker
+    defender_id:    object_id of defender
+    damage:         damage dealt by the hit
+    attack_kind:    FIGHTER_LOG_ACTION_KIND_... constant, for the "kind" of move done
+    arg6:           unknown
+*/
 
 unsafe extern "C" fn ryu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
