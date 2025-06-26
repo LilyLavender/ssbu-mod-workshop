@@ -55,7 +55,7 @@ unsafe extern "C" fn ryu_game_attackairf(agent: &mut L2CAgentBase) {
 }
 
 #[skyline::hook(offset = NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET)]
-pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash::app::FighterManager, attacker_id: u32, defender_id: u32, damage: f32, attack_kind: i32, arg6: bool) -> u64 {
+pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash::app::FighterManager, attacker_id: u32, defender_id: u32, damage: f32, attack_kind: i32, damage_meteor: bool) -> u64 {
     let attacker_boma = sv_battle_object::module_accessor(attacker_id);
     let defender_boma = sv_battle_object::module_accessor(defender_id);
     let attacker_kind = sv_battle_object::kind(attacker_id);
@@ -73,14 +73,14 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
         }
     }
     
-    original!()(fighter_manager, attacker_id, defender_id, damage, attack_kind, arg6)
+    original!()(fighter_manager, attacker_id, defender_id, damage, attack_kind, damage_meteor)
 }
 /*
     attacker_id:    object_id of attacker
     defender_id:    object_id of defender
     damage:         damage dealt by the hit
-    attack_kind:    FIGHTER_LOG_ACTION_KIND_... constant, for the "kind" of move done
-    arg6:           unknown
+    attack_kind:    FIGHTER_LOG_ACTION_KIND_... constant, for the "kind" of move hit
+    damage_meteor:  if the hit spiked. related to FIGHTER_LOG_DATA_FLAG_ON_DAMAGE_METEOR
 */
 
 unsafe extern "C" fn ryu_frame(fighter: &mut L2CFighterCommon) {
