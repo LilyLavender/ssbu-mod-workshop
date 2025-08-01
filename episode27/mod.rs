@@ -79,7 +79,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     attacker_id:    object_id of attacker
     defender_id:    object_id of defender
     damage:         damage dealt by the hit
-    attack_kind:    FIGHTER_LOG_ACTION_KIND_... constant, for the "kind" of move hit
+    attack_kind:    FIGHTER_LOG_ATTACK_KIND_... constant, for the "kind" of move hit
     damage_meteor:  if the hit spiked. related to FIGHTER_LOG_DATA_FLAG_ON_DAMAGE_METEOR
 */
 
