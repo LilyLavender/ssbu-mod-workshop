@@ -6,7 +6,7 @@
 | Hash | Text | Description | Type | 
 | --- | --- | --- | --- |
 | 0x13313725f6 | collision_attr_**aura** | Emits blue flame-like particles. Primarily used on Lucario's moves, but can also be found on Richter's Holy Water. | Visual |
-| 0x193bdcb0cc | collision_attr_**auto_shift** | Enables [ASDI](https://www.ssbwiki.com/Smash_directional_influence#Automatic_smash_directional_influence). Used only in the first 8 hits of Kazuya's 10-Hit Combo. | Hit | <!-- Need to know if it has visuals. -->
+| 0x193bdcb0cc | collision_attr_**auto_shift** | Enables [ASDI](https://www.ssbwiki.com/Smash_directional_influence#Automatic_smash_directional_influence). Visually identical to normal. Used only in the first 8 hits of Kazuya's 10-Hit Combo. | Hit |
 | 0x13a0a379de | collision_attr_**bind** | Inflicts the dizzy status (eg. shield breaks). Only works on ground. | Hit |
 | 0x199d57f593 | collision_attr_**bind_extra** | Inflicts a variant on the dizzy effect that calls to different params in common.prc. Used in Mewtwo's Disable and Marshadow. | Hit |
 | 0x21016e5c76 | collision_attr_**blaster_throw_down** | 📝 Only used on Fox's Down Throw. | Visual | <!-- Need a general description of what it looks like. If it's similar to another hit effect, mention how it differs. -->
