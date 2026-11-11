@@ -9,8 +9,7 @@ use {
     smash_script::*,
 	smashline::{*, Priority::*}
 };
-
-pub const FIGHTER_CHROM_GENERATE_ARTICLE_LIGHTBEAM :i32 = 0x1;
+use super::*;
 
 unsafe extern "C" fn chrom_game_specials1(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {

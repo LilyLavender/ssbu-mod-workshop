@@ -14,16 +14,15 @@ ___
 ### 2. Clone the article using the following line of code:  
 ```rust
 smashline::clone_weapon(
-  /*Agent you want to clone from*/,
-  /*Article you want to clone from*/,
-  /*Agent you want to clone to*/,
-  /*Name of the new article*/,
-  /*Whether to use the original code of the article*/
+  /* Agent you want to clone to */,
+  /* Name of the new article */,
+  /* Article you want to clone from */,
+  /* Whether to use the original code of the article */
 );
 ```
 Example usage:
 ```rust
-smashline::clone_weapon("mario", *WEAPON_KIND_MARIO_FIREBALL, "marth", "landmine", true);
+smashline::clone_weapon("marth", "landmine", *WEAPON_KIND_MARIO_FIREBALL, true);
 ```
 > This code segment can go anywhere in your code, but it's best practice do it in the install section for the character.  
 (Notice, if you're cloning something like Mario's Fireball, or any other article that calls to a fighter specific effect, you need to copy said effect to the agent you're cloning to)
